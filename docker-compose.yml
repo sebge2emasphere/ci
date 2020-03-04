@@ -1,0 +1,6 @@
+version: '3'
+services:
+  i18n-tool:
+    image: 'sebge2/jenkins:latest'
+    ports:
+      - '8080:8080'
