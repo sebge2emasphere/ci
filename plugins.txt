@@ -10,3 +10,5 @@ github:1.29.5
 github-branch-source:2.6.0
 google-login:1.6
 maven-plugin:3.4
+timestamper:1.11.1
+role-strategy:2.16

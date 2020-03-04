@@ -1,3 +1,16 @@
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - basicSSHUserPrivateKey:
+              description: "Github"
+              id: "build-dev-admin"
+              passphrase: "${CREDENTIALS_GITHUB_PASSPHRASE}"
+              privateKeySource:
+                directEntry:
+                  privateKey: "${CREDENTIALS_GITHUB_KEY}"
+              scope: GLOBAL
+              username: "sebge2emasphere"
 jenkins:
   agentProtocols:
     - "JNLP4-connect"
@@ -59,7 +72,7 @@ unclassified:
       \ console output at $BUILD_URL to view the results."
     defaultContentType: "text/plain"
     defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
-    defaultSuffix: "[Jenkins-Dev] "
+    defaultSuffix: "@emasphere.com"
     maxAttachmentSize: -1
     maxAttachmentSizeMb: 0
     precedenceBulk: false
@@ -105,6 +118,10 @@ unclassified:
         triggers:
           skipScmCause: false
           skipUpstreamCause: false
+  timestamperConfig:
+    allPipelines: false
+    elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
+    systemTimeFormat: "'<b>'HH:mm:ss'</b> '"
 tool:
   git:
     installations:
