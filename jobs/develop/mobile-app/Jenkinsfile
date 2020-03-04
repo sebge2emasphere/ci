@@ -1,0 +1,46 @@
+pipeline {
+   agent any
+
+    tools {
+        nodejs "NodeJS"
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+
+    stages {
+      stage('Cloning Repo') {
+         steps {
+            git branch: 'master',
+                credentialsId: 'b35f24b1-359a-41b4-a342-c1bddbd4b9b8',
+                url: 'https://github.com/EMAsphere/mobile.git'
+         }
+      }
+      stage('Install Dep') {
+         steps {
+            sh "npm install"
+         }
+      }
+      stage('Build') {
+         steps {
+            sh "npm run build"
+         }
+      }
+    }
+
+    post {
+        changed {
+                    emailext subject: '$DEFAULT_SUBJECT',
+                        body: '$DEFAULT_CONTENT',
+                        recipientProviders: [
+                            [$class: 'CulpritsRecipientProvider'],
+                            [$class: 'DevelopersRecipientProvider'],
+                            [$class: 'RequesterRecipientProvider']
+                        ],
+                        replyTo: '$DEFAULT_REPLYTO',
+                        to: '$DEFAULT_RECIPIENTS'
+        }
+    }
+}
+

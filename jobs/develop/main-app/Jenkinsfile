@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    tools {
+        maven "Maven 3"
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+
+    stages {
+        stage("Cloning Repo") {
+         steps {
+            git branch: "develop",
+                credentialsId: "b35f24b1-359a-41b4-a342-c1bddbd4b9b8",
+                url: "https://github.com/EMAsphere/emasphere.git"
+         }
+        }
+        stage("Build") {
+            steps {
+                sh "mvn clean install -pl ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME} -B -DskipTests --also-make"
+            }
+        }
+        stage("Test") {
+            steps {
+                sh "cd ${SERVICE_ROOT_PATH} && mvn test"
+            }
+            post {
+                success {
+                    junit "${SERVICE_ROOT_PATH}/**/target/surefire-reports/TEST-*.xml"
+                    archiveArtifacts "${SERVICE_ROOT_PATH}/**/target/*.jar"
+                }
+            }
+        }
+    }
+}
+
