@@ -31,6 +31,17 @@ pipeline {
                     junit "${SERVICE_ROOT_PATH}/**/target/surefire-reports/TEST-*.xml"
                     archiveArtifacts "${SERVICE_ROOT_PATH}/**/target/*.jar"
                 }
+                changed {
+                    emailext subject: '$DEFAULT_SUBJECT',
+                        body: '$DEFAULT_CONTENT',
+                        recipientProviders: [
+                            [$class: 'CulpritsRecipientProvider'],
+                            [$class: 'DevelopersRecipientProvider'],
+                            [$class: 'RequesterRecipientProvider']
+                        ],
+                        replyTo: '$DEFAULT_REPLYTO',
+                        to: '$DEFAULT_RECIPIENTS'
+                }
             }
         }
     }

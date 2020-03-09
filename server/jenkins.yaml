@@ -286,6 +286,240 @@ jobs:
           }
       }
   - script: >
+      pipelineJob('configuration-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server/config', 'SERVICE_MODULE_NAME': 'config-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('connector-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server/connector', 'SERVICE_MODULE_NAME': 'connector-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('dashboard-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server/dashboard', 'SERVICE_MODULE_NAME': 'dashboard-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('data-visualization-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server/data-visualization', 'SERVICE_MODULE_NAME': 'data-visualization-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('directory-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server/directory', 'SERVICE_MODULE_NAME': 'directory-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('export-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'export-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('forecast-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server/forecast', 'SERVICE_MODULE_NAME': 'forecast-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('gateway-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'gateway-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('integration-gateway-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server/integration', 'SERVICE_MODULE_NAME': 'integration-gateway')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('job-execution-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server/job-execution', 'SERVICE_MODULE_NAME': 'job-execution-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('kpi-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server/kpi', 'SERVICE_MODULE_NAME': 'kpi-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('mobile-gateway-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'mobile-gateway-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('operational-service-develop') {
+          environmentVariables('SERVICE_ROOT_PATH': 'server/operational', 'SERVICE_MODULE_NAME': 'operational-service')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('b35f24b1-359a-41b4-a342-c1bddbd4b9b8')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
       pipelineJob('situation-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/situation', 'SERVICE_MODULE_NAME': 'situation-service')
           definition {
