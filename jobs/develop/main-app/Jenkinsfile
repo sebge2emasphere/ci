@@ -5,14 +5,13 @@ pipeline {
         githubPush()
     }
 
-    options([pipelineTriggers([snapshotDependencies()])])
-
     tools {
         maven "Maven 3"
     }
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
+        pipelineTriggers([snapshotDependencies()])
     }
 
     stages {
