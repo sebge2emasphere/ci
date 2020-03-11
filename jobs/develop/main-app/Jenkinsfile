@@ -29,7 +29,7 @@ pipeline {
               extensions: [
                 [$class: "PathRestriction", excludedRegions: "", includedRegions: "${SERVICE_ROOT_PATH}/.*"]
               ]
-            )            
+            ])
          }
         }
         stage("Build") {
