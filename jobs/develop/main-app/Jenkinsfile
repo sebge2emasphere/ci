@@ -5,7 +5,7 @@ pipeline {
         githubPush()
     }
 
-    properties([pipelineTriggers([snapshotDependencies()])])
+    options([pipelineTriggers([snapshotDependencies()])])
 
     tools {
         maven "Maven 3"
