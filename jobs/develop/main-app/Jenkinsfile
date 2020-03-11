@@ -13,6 +13,11 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
 
+    triggers {
+        githubPush()
+        snapshotDependencies()
+    }
+
     stages {
         stage("Cloning Repo") {
          steps {
