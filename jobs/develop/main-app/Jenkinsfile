@@ -22,10 +22,7 @@ pipeline {
             }
             git branch: "develop",
                 credentialsId: "b35f24b1-359a-41b4-a342-c1bddbd4b9b8",
-                url: "https://github.com/EMAsphere/emasphere.git",
-                extensions: [
-                    [$class: "PathRestriction", excludedRegions: "", includedRegions: "${SERVICE_ROOT_PATH}/.*" ]
-                ]
+                url: "https://github.com/EMAsphere/emasphere.git"
          }
         }
         stage("Build") {
