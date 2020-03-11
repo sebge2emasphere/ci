@@ -22,40 +22,43 @@ pipeline {
             }
             git branch: "develop",
                 credentialsId: "b35f24b1-359a-41b4-a342-c1bddbd4b9b8",
-                url: "https://github.com/EMAsphere/emasphere.git"
+                url: "https://github.com/EMAsphere/emasphere.git",
+                extensions: [
+                    [$class: "PathRestriction", excludedRegions: "", includedRegions: "${SERVICE_ROOT_PATH}/.*" ]
+                ]
          }
         }
         stage("Build") {
             steps {
-                withMaven(maven: 'Maven 3') {
+                withMaven(maven: "Maven 3") {
                     sh "mvn clean install -pl ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME} -B -DskipTests -Pci --also-make"
                 }
             }
         }
         stage("Test") {
             steps {
-                withMaven(maven: 'Maven 3') {
+                withMaven(maven: "Maven 3") {
                     sh "cd ${SERVICE_ROOT_PATH} && mvn test -B -Pci -DskipTests "
                 }
             }
         }
         stage("Deploy") {
             steps {
-                withMaven(maven: 'Maven 3') {
+                withMaven(maven: "Maven 3") {
                     sh "cd ${SERVICE_ROOT_PATH} && mvn install -B -DskipTests -Pci"
                 }
             }
             post {
                 changed {
-                    emailext subject: '$DEFAULT_SUBJECT',
-                        body: '$DEFAULT_CONTENT',
+                    emailext subject: "$DEFAULT_SUBJECT",
+                        body: "$DEFAULT_CONTENT",
                         recipientProviders: [
-                            [$class: 'CulpritsRecipientProvider'],
-                            [$class: 'DevelopersRecipientProvider'],
-                            [$class: 'RequesterRecipientProvider']
+                            [$class: "CulpritsRecipientProvider"],
+                            [$class: "DevelopersRecipientProvider"],
+                            [$class: "RequesterRecipientProvider"]
                         ],
-                        replyTo: '$DEFAULT_REPLYTO',
-                        to: '$DEFAULT_RECIPIENTS'
+                        replyTo: "$DEFAULT_REPLYTO",
+                        to: "$DEFAULT_RECIPIENTS"
                 }
             }
         }
