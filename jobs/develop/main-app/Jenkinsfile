@@ -25,7 +25,7 @@ pipeline {
               userRemoteConfigs: [
                 [url: "https://github.com/EMAsphere/emasphere.git"],
                 [credentialsId:"b35f24b1-359a-41b4-a342-c1bddbd4b9b8"]
-              ]
+              ],
               extensions: [
                 [$class: "PathRestriction", excludedRegions: "", includedRegions: "${SERVICE_ROOT_PATH}/.*"]
               ]
