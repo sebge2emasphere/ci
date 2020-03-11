@@ -6,21 +6,6 @@ pipeline {
         snapshotDependencies()
     }
 
-    definition {
-        cpsScm {
-          scm {
-            git {
-              extensions {
-                pathRestriction {
-                  includedRegions("${SERVICE_ROOT_PATH}/*")
-                  excludedRegions("")
-                }
-              }
-            }
-          }
-        }
-    }
-
     tools {
         maven "Maven 3"
     }
