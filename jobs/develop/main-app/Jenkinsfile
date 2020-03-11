@@ -19,7 +19,9 @@ pipeline {
         }
         stage("Build") {
             steps {
-                sh "mvn clean install -pl ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME} -B -DskipTests --also-make"
+                withMaven() {
+                    sh "mvn clean install -pl ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME} -B -DskipTests --also-make"
+                }
             }
         }
         stage("Test") {
