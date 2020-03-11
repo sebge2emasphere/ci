@@ -3,7 +3,7 @@ pipeline {
 
     triggers {
         githubPush()
-//         snapshotDependencies()
+        snapshotDependencies()
     }
 
     tools {
