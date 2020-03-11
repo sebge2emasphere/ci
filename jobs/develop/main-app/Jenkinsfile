@@ -3,6 +3,7 @@ pipeline {
 
     triggers {
         githubPush()
+        snapshotDependencies()
     }
 
     tools {
@@ -11,11 +12,6 @@ pipeline {
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
-    }
-
-    triggers {
-        githubPush()
-        snapshotDependencies()
     }
 
     stages {
