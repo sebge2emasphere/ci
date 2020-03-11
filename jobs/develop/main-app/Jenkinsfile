@@ -32,13 +32,13 @@ pipeline {
                 }
             }
         }
-        stage("Test") {
-            steps {
-                withMaven(maven: 'Maven 3') {
-                    sh "cd ${SERVICE_ROOT_PATH} && mvn test -B -Pci"
-                }
-            }
-        }
+//         stage("Test") {
+//             steps {
+//                 withMaven(maven: 'Maven 3') {
+//                     sh "cd ${SERVICE_ROOT_PATH} && mvn test -B -Pci"
+//                 }
+//             }
+//         }
         stage("Deploy") {
             steps {
                 withMaven(maven: 'Maven 3') {
