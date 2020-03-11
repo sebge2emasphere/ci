@@ -17,9 +17,9 @@ pipeline {
     stages {
         stage("Cloning Repo") {
          steps {
-            script {
-                properties([pipelineTriggers([snapshotDependencies()])])
-            }
+//             script {
+//                 properties([pipelineTriggers([snapshotDependencies()])])
+//             }
             git branch: "develop",
                 credentialsId: "b35f24b1-359a-41b4-a342-c1bddbd4b9b8",
                 url: "https://github.com/EMAsphere/emasphere.git"
@@ -32,13 +32,13 @@ pipeline {
                 }
             }
         }
-//         stage("Test") {
-//             steps {
-//                 withMaven(maven: 'Maven 3') {
-//                     sh "cd ${SERVICE_ROOT_PATH} && mvn test -B -Pci"
-//                 }
-//             }
-//         }
+        stage("Test") {
+            steps {
+                withMaven(maven: 'Maven 3') {
+                    sh "cd ${SERVICE_ROOT_PATH} && mvn test -B -Pci -DskipTests "
+                }
+            }
+        }
         stage("Deploy") {
             steps {
                 withMaven(maven: 'Maven 3') {
