@@ -19,20 +19,18 @@ pipeline {
         }
         stage("Build") {
             steps {
-                withMaven() {
-                    sh "mvn clean install -pl ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME} -B -DskipTests --also-make"
+                withMaven(maven: 'Maven 3') {
+                    sh "mvn clean install -pl ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME} -B -DskipTests -Pci --also-make"
                 }
             }
         }
         stage("Test") {
             steps {
-                sh "cd ${SERVICE_ROOT_PATH} && mvn test"
+                withMaven(maven: 'Maven 3') {
+                    sh "cd ${SERVICE_ROOT_PATH} && mvn test -Pci"
+                }
             }
             post {
-                success {
-                    junit "${SERVICE_ROOT_PATH}/**/target/surefire-reports/TEST-*.xml"
-                    archiveArtifacts "${SERVICE_ROOT_PATH}/**/target/*.jar"
-                }
                 changed {
                     emailext subject: '$DEFAULT_SUBJECT',
                         body: '$DEFAULT_CONTENT',
