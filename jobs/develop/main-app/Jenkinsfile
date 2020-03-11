@@ -3,8 +3,9 @@ pipeline {
 
     triggers {
         githubPush()
-        snapshotDependencies(true)
     }
+
+    properties([pipelineTriggers([snapshotDependencies()])]
 
     tools {
         maven "Maven 3"
