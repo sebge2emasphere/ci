@@ -51,19 +51,19 @@ pipeline {
                     sh "cd ${SERVICE_ROOT_PATH} && mvn install -B -DskipTests -Pci"
                 }
             }
-            post {
-                changed {
-                    emailext subject: "$DEFAULT_SUBJECT",
-                        body: "$DEFAULT_CONTENT",
-                        recipientProviders: [
-                            [$class: "CulpritsRecipientProvider"],
-                            [$class: "DevelopersRecipientProvider"],
-                            [$class: "RequesterRecipientProvider"]
-                        ],
-                        replyTo: "$DEFAULT_REPLYTO",
-                        to: "$DEFAULT_RECIPIENTS"
-                }
-            }
+        }
+    }
+    post {
+        changed {
+            emailext subject: "$DEFAULT_SUBJECT",
+                body: "$DEFAULT_CONTENT",
+                recipientProviders: [
+                    [$class: "CulpritsRecipientProvider"],
+                    [$class: "DevelopersRecipientProvider"],
+                    [$class: "RequesterRecipientProvider"]
+                ],
+                replyTo: "$DEFAULT_REPLYTO",
+                to: "$DEFAULT_RECIPIENTS"
         }
     }
 }
