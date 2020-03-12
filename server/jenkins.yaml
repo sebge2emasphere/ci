@@ -229,14 +229,21 @@ tool:
                 - nodeJSInstaller:
                     id: "11.1.0"
                     npmPackagesRefreshHours: 72
-
+  pipelineMaven:
+    publisherOptions:
+      - pipelineGraphPublisher:
+          includeReleaseVersions: true
+          includeScopeTest: true
+          lifecycleThreshold: "install"
+    triggerDownstreamUponResultAborted: false
+    triggerDownstreamUponResultFailure: false
+    triggerDownstreamUponResultNotBuilt: false
+    triggerDownstreamUponResultSuccess: true
+    triggerDownstreamUponResultUnstable: false
 jobs:
   - script: >
       pipelineJob('accounting-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/accounting', 'SERVICE_MODULE_NAME': 'accounting-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -255,9 +262,6 @@ jobs:
   - script: >
       pipelineJob('api-gateway-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'api-gateway-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -276,9 +280,6 @@ jobs:
   - script: >
       pipelineJob('collaboration-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/collaboration', 'SERVICE_MODULE_NAME': 'collaboration-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -297,9 +298,6 @@ jobs:
   - script: >
       pipelineJob('configuration-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/config', 'SERVICE_MODULE_NAME': 'config-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -318,9 +316,6 @@ jobs:
   - script: >
       pipelineJob('connector-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/connector', 'SERVICE_MODULE_NAME': 'connector-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -338,10 +333,7 @@ jobs:
       }
   - script: >
       pipelineJob('dashboard-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/dashboard', 'SERVICE_MODULE_NAME': 'dashboard-service')
-          triggers {
-            githubPush()
-          }
+          environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'dashboard-service')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -360,9 +352,6 @@ jobs:
   - script: >
       pipelineJob('data-visualization-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/data-visualization', 'SERVICE_MODULE_NAME': 'data-visualization-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -381,9 +370,6 @@ jobs:
   - script: >
       pipelineJob('directory-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/directory', 'SERVICE_MODULE_NAME': 'directory-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -402,9 +388,6 @@ jobs:
   - script: >
       pipelineJob('export-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'export-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -423,9 +406,6 @@ jobs:
   - script: >
       pipelineJob('forecast-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/forecast', 'SERVICE_MODULE_NAME': 'forecast-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -444,9 +424,6 @@ jobs:
   - script: >
       pipelineJob('gateway-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'gateway-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -465,9 +442,6 @@ jobs:
   - script: >
       pipelineJob('integration-gateway-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/integration', 'SERVICE_MODULE_NAME': 'integration-gateway')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -486,9 +460,6 @@ jobs:
   - script: >
       pipelineJob('job-execution-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/job-execution', 'SERVICE_MODULE_NAME': 'job-execution-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -507,9 +478,6 @@ jobs:
   - script: >
       pipelineJob('kpi-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/kpi', 'SERVICE_MODULE_NAME': 'kpi-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -528,9 +496,6 @@ jobs:
   - script: >
       pipelineJob('mobile-gateway-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'mobile-gateway-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -549,9 +514,6 @@ jobs:
   - script: >
       pipelineJob('operational-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/operational', 'SERVICE_MODULE_NAME': 'operational-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -570,9 +532,6 @@ jobs:
   - script: >
       pipelineJob('situation-service-develop') {
           environmentVariables('SERVICE_ROOT_PATH': 'server/situation', 'SERVICE_MODULE_NAME': 'situation-service')
-          triggers {
-            githubPush()
-          }
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
