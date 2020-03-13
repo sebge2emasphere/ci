@@ -84,6 +84,10 @@ jenkins:
               - "Job/Build"
               - "Job/Read"
               - "Job/Workspace"
+  clouds:
+    - kubernetes:
+        name: "kubernetes"
+        directConnection: true
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: false
@@ -133,6 +137,12 @@ security:
     creationOfLegacyTokenEnabled: false
     tokenGenerationOnCreationEnabled: false
     usageStatisticsEnabled: true
+  envInject:
+    enableLoadingFromMaster: false
+    enablePermissions: false
+    hideInjectedVars: false
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: true
   queueItemAuthenticator:
     authenticators:
       - global:
@@ -140,8 +150,15 @@ security:
   sSHD:
     port: -1
 unclassified:
+  buildDiscarders:
+    configuredBuildDiscarders:
+      - "jobBuildDiscarder"
   buildStepOperation:
     enabled: false
+  defaultFolderConfiguration:
+    healthMetrics:
+      - worstChildHealthMetric:
+          recursive: true
   extendedEmailPublisher:
     adminRequiredForTemplateTesting: false
     allowUnregisteredEnabled: false
