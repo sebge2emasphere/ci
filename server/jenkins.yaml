@@ -87,7 +87,9 @@ jenkins:
   clouds:
     - kubernetes:
         name: "kubernetes"
-        directConnection: true
+        directConnection: false
+        maxRequestsPerHostStr: "32"
+        jenkinsUrl: "http://ci-server:8080"
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: false

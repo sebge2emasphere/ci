@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: ci
+  name: ci-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ci-server
+    spec:
+      serviceAccountName: ci-server-service-account
+      imagePullSecrets:
+        - name: com.emasphere.dev.ecr
+      containers:
+        - name: ci-server
+          image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - name: http-port
+              containerPort: 8080
+            - name: agent-port
+              containerPort: 50000
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+          resources:
+            limits:
+              memory: "3000Mi"
+      volumes:
+        - name: jenkins-home
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ci
+  name: ci-server
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+    - name: agent
+      port: 50000
+      targetPort: 50000
+  selector:
+    app: ci-server
