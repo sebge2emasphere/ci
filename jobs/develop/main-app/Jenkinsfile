@@ -23,7 +23,7 @@ pipeline {
             checkout([$class: "GitSCM",
               branches: [[name: "*/develop"]],
               userRemoteConfigs: [
-                [url: "https://github.com/EMAsphere/emasphere.git", credentialsId:"github-user-token"]
+                [url: "https://github.com/EMAsphere/emasphere.git", credentialsId:"another-test-usernamepass"]
               ],
               extensions: [
                 [$class: "PathRestriction", excludedRegions: "", includedRegions: "${SERVICE_ROOT_PATH}/.*"]
