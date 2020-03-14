@@ -15,7 +15,7 @@ spec:
         - name: com.emasphere.dev.ecr
       containers:
         - name: ci-server
-          image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins:1.0.0
+          image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-server:1.0.0
           imagePullPolicy: Always
           ports:
             - name: http-port

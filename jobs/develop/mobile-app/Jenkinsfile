@@ -4,7 +4,7 @@ pipeline {
           label 'mobile-build'
           containerTemplate {
             name 'node'
-            image '840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/node:1.0.0'
+            image '840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-nodejs:1.0.0'
             imagePullSecrets 'com.emasphere.dev.ecr'
             ttyEnabled true
             command 'cat'
