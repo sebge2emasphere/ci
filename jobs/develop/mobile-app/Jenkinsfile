@@ -1,8 +1,15 @@
 pipeline {
-   agent any
-
-    tools {
-        nodejs "NodeJS"
+    agent {
+        kubernetes {
+          label 'mobile-build'
+          containerTemplate {
+            name 'node'
+            image '840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/node:1.0.0'
+            imagePullSecrets 'com.emasphere.dev.ecr'
+            ttyEnabled true
+            command 'cat'
+          }
+        }
     }
 
     options {
@@ -10,14 +17,14 @@ pipeline {
     }
 
     stages {
-      stage('Cloning Repo') {
+      stage('Checkout') {
          steps {
             git branch: 'master',
                 credentialsId: 'b35f24b1-359a-41b4-a342-c1bddbd4b9b8',
                 url: 'https://github.com/EMAsphere/mobile.git'
          }
       }
-      stage('Install Dep') {
+      stage('Install') {
          steps {
             sh "npm install"
          }
@@ -43,4 +50,3 @@ pipeline {
         }
     }
 }
-
