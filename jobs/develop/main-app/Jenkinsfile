@@ -1,5 +1,16 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+          label 'mobile-build'
+          containerTemplate {
+            name 'node'
+            image '840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/ema-jenkins-container:1.0.0'
+            imagePullSecrets 'com.emasphere.dev.ecr'
+            ttyEnabled true
+            command 'cat'
+          }
+        }
+    }
 
     triggers {
         githubPush()
@@ -23,7 +34,7 @@ pipeline {
             checkout([$class: "GitSCM",
               branches: [[name: "*/develop"]],
               userRemoteConfigs: [
-                [url: "https://github.com/EMAsphere/emasphere.git", credentialsId:"another-test-usernamepass"]
+                [url: "https://github.com/EMAsphere/emasphere.git", credentialsId: "b35f24b1-359a-41b4-a342-c1bddbd4b9b8"]
               ],
               extensions: [
                 [$class: "PathRestriction", excludedRegions: "", includedRegions: "${SERVICE_ROOT_PATH}/.*"]

@@ -25,6 +25,9 @@ RUN unzip /tmp/sencha-cmd.zip -d $SENCHA_HOME && rm /tmp/sencha-cmd.zip
 
 
 RUN apk add --no-cache libstdc++
+RUN apk --update add git less openssh && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm /var/cache/apk/*
 
 RUN chmod ugo+x $SENCHA_HOME/bin/6.2.2.36/sencha
 RUN chmod ugo+x $MAVEN_HOME/bin/mvn
