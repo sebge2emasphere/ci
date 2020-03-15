@@ -7,7 +7,7 @@ spec:
   imagePullSecrets:
     - name: com.emasphere.dev.ecr
   containers:
-  - name: node
+  - name: nodejs
     image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-nodejs:1.0.1
     imagePullPolicy: Always
     command:
@@ -30,10 +30,12 @@ spec:
          }
       }
       stage('Install') {
-         steps {
-            sh 'ls -al /usr/local/bin/'
-            sh 'sleep 120'
-            sh "npm install"
+            container('nodejs') {
+             steps {
+                sh 'ls -al /usr/local/bin/'
+                sh 'sleep 120'
+                sh "npm install"
+             }
          }
       }
       stage('Build') {
