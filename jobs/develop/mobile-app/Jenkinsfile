@@ -49,5 +49,11 @@ spec:
                         replyTo: '$DEFAULT_REPLYTO',
                         to: 'sgerard@emasphere.com'
         }
+        failure {
+                    emailext subject: '$DEFAULT_SUBJECT',
+                        body: '$DEFAULT_CONTENT',
+                        replyTo: '$DEFAULT_REPLYTO',
+                        to: 'sgerard@emasphere.com'
+        }
     }
 }
