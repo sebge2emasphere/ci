@@ -8,7 +8,7 @@ spec:
     - name: com.emasphere.dev.ecr
   containers:
   - name: nodejs
-    image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-nodejs:1.0.1
+    image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-nodejs:1.0.0
     imagePullPolicy: Always
     command:
     - cat
