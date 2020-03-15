@@ -31,6 +31,7 @@ spec:
       }
       stage('Install') {
          steps {
+            sh 'sleep 120'
             sh "npm install"
          }
       }
