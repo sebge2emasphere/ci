@@ -1,14 +1,19 @@
 pipeline {
     agent {
         kubernetes {
-          label 'mobile-build'
-          containerTemplate {
-            name 'node'
-            image '840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-container:1.0.0'
-            imagePullSecrets 'com.emasphere.dev.ecr'
-            ttyEnabled true
-            command 'cat'
-          }
+            label 'mobile-build'
+            yaml """
+spec:
+  imagePullSecrets:
+    - name: com.emasphere.dev.ecr
+  containers:
+  - name: nodejs
+    image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-container:1.0.0
+    imagePullPolicy: Always
+    command:
+    - cat
+    tty: true
+"""
         }
     }
 
@@ -27,20 +32,20 @@ pipeline {
 
     stages {
         stage("Cloning Repo") {
-         steps {
-            script {
-                properties([pipelineTriggers([snapshotDependencies(), [$class: "GitHubPushTrigger"]])])
+            steps {
+                script {
+                    properties([pipelineTriggers([snapshotDependencies(), [$class: "GitHubPushTrigger"]])])
+                }
+                checkout([$class: "GitSCM",
+                    branches: [[name: "*/develop"]],
+                    userRemoteConfigs: [
+                    [url: "https://github.com/EMAsphere/emasphere.git", credentialsId: "b35f24b1-359a-41b4-a342-c1bddbd4b9b8"]
+                ],
+                extensions: [
+                    [$class: "PathRestriction", excludedRegions: "", includedRegions: "${SERVICE_ROOT_PATH}/.*"]
+                ]
+                ])
             }
-            checkout([$class: "GitSCM",
-              branches: [[name: "*/develop"]],
-              userRemoteConfigs: [
-                [url: "https://github.com/EMAsphere/emasphere.git", credentialsId: "b35f24b1-359a-41b4-a342-c1bddbd4b9b8"]
-              ],
-              extensions: [
-                [$class: "PathRestriction", excludedRegions: "", includedRegions: "${SERVICE_ROOT_PATH}/.*"]
-              ]
-            ])
-         }
         }
         stage("Build") {
             steps {
