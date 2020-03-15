@@ -1,8 +1,8 @@
 pipeline {
     agent {
         kubernetes {
-          label 'mobile-build'
-          yaml """
+            label 'mobile-build'
+            yaml """
 spec:
   imagePullSecrets:
     - name: com.emasphere.dev.ecr
@@ -22,41 +22,41 @@ spec:
     }
 
     stages {
-      stage('Checkout') {
-         steps {
-            git branch: 'master',
-                credentialsId: 'b35f24b1-359a-41b4-a342-c1bddbd4b9b8',
-                url: 'https://github.com/EMAsphere/mobile.git'
-         }
-      }
-      stage('Install') {
-        steps {
-            container('nodejs') {
-                sh "npm install"
+        stage('Checkout') {
+            steps {
+                git branch: 'master',
+                    credentialsId: 'b35f24b1-359a-41b4-a342-c1bddbd4b9b8',
+                    url: 'https://github.com/EMAsphere/mobile.git'
             }
         }
-      }
-      stage('Build') {
-         steps {
-            container('nodejs') {
-                sh "npm run build"
+        stage('Install') {
+            steps {
+                container('nodejs') {
+                    sh "npm install"
+                }
             }
-         }
-      }
+        }
+        stage('Build') {
+            steps {
+                container('nodejs') {
+                    sh "npm run build"
+                }
+            }
+        }
     }
 
     post {
         changed {
-                    emailext subject: '$DEFAULT_SUBJECT',
-                        body: '$DEFAULT_CONTENT',
-                        replyTo: '$DEFAULT_REPLYTO',
-                        to: 'sgerard@emasphere.com'
+            emailext subject: '$DEFAULT_SUBJECT',
+                     body: '$DEFAULT_CONTENT',
+                     replyTo: '$DEFAULT_REPLYTO',
+                     to: 'sgerard@emasphere.com'
         }
         failure {
-                    emailext subject: '$DEFAULT_SUBJECT',
-                        body: '$DEFAULT_CONTENT',
-                        replyTo: '$DEFAULT_REPLYTO',
-                        to: 'sgerard@emasphere.com'
+            emailext subject: '$DEFAULT_SUBJECT',
+                     body: '$DEFAULT_CONTENT',
+                     replyTo: '$DEFAULT_REPLYTO',
+                     to: 'sgerard@emasphere.com'
         }
     }
 }
