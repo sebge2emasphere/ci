@@ -2,13 +2,17 @@ pipeline {
     agent {
         kubernetes {
           label 'mobile-build'
-          containerTemplate {
-            name 'node'
-            image '840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkinsnodejs:1.0.0'
-            imagePullSecretsX 'com.emasphere.dev.ecr'
-            ttyEnabled true
-            command 'cat'
-          }
+          yaml """
+spec:
+  imagePullSecrets:
+  - name: com.emasphere.dev.ecr
+  containers:
+  - name: node
+    image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-nodejs:1.0.0
+    command:
+    - cat
+    tty: true
+"""
         }
     }
 
