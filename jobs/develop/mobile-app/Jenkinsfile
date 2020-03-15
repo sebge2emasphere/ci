@@ -30,13 +30,13 @@ spec:
          }
       }
       stage('Install') {
-            container('nodejs') {
              steps {
-                sh 'ls -al /usr/local/bin/'
-                sh 'sleep 120'
-                sh "npm install"
+                container('nodejs') {
+                    sh 'ls -al /usr/local/bin/'
+                     sh 'sleep 120'
+                    sh "npm install"
+                }
              }
-         }
       }
       stage('Build') {
          steps {
