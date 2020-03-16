@@ -19,6 +19,8 @@ spec:
 
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
+        disableConcurrentBuilds()
+        timeout(time: 10, unit: 'MINUTES')
     }
 
     stages {
@@ -63,7 +65,7 @@ spec:
             emailext subject: '$DEFAULT_SUBJECT',
                      body: '$DEFAULT_CONTENT',
                      replyTo: '$DEFAULT_REPLYTO',
-                     to: 'sgerard@emasphere.com'
+                     to: '$DEFAULT_RECIPIENTS'
         }
     }
 }
