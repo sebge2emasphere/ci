@@ -25,7 +25,7 @@ spec:
         stage('Checkout') {
             steps {
                 git branch: 'master',
-                    credentialsId: 'another-test-usernamepass',
+                    credentialsId: 'github-user-token',
                     url: 'https://github.com/EMAsphere/mobile.git'
             }
         }
