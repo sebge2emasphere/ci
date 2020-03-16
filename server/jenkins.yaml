@@ -144,9 +144,10 @@ unclassified:
     charset: "UTF-8"
     debugMode: false
     defaultBody: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:\r\n\r\nCheck console output at $BUILD_URL to view the results."
-    defaultContentType: "text/plain"
+    defaultContentType: "text/html"
     defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
     defaultSuffix: "@emasphere.com"
+    defaultRecipients: "sgerard@emasphere.com"
     maxAttachmentSize: -1
     maxAttachmentSizeMb: 0
     precedenceBulk: false
@@ -182,9 +183,11 @@ unclassified:
     pollingThreadCount: 10
   slackNotifier:
     botUser: false
-    room: "#development"
+    room: "#general"
     sendAsText: false
-    teamDomain: "https://hooks.slack.com/services/T0EEMLPPU/BB5URQ80G/"
+    slackUserIdResolver: "no"
+    teamDomain: "sgetest"
+    tokenCredentialId: "slack-integration-id"
   sonarGlobalConfiguration:
     buildWrapperEnabled: false
     installations:
