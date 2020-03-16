@@ -46,8 +46,8 @@ spec:
     }
 
     post {
-        always {
-            slackSend()
+        success {
+            slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (<a href='${env.BUILD_URL}'>Open</a>)")
         }
 
         changed {
@@ -57,6 +57,8 @@ spec:
                      to: 'sgerard@emasphere.com'
         }
         failure {
+            slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (<a href='${env.BUILD_URL}'>Open</a>)")
+
             emailext subject: '$DEFAULT_SUBJECT',
                      body: '$DEFAULT_CONTENT',
                      replyTo: '$DEFAULT_REPLYTO',
