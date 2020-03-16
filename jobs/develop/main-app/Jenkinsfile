@@ -22,12 +22,10 @@ spec:
         snapshotDependencies()
     }
 
-    tools {
-        maven "Maven 3"
-    }
-
     options {
-        buildDiscarder(logRotator(numToKeepStr: "5"))
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        disableConcurrentBuilds()
+        timeout(time: 10, unit: 'MINUTES')
     }
 
     stages {
@@ -70,18 +68,26 @@ spec:
 //         }
     }
 
-//     post {
-//         changed {
-//             emailext subject: "$DEFAULT_SUBJECT",
-//                 body: "$DEFAULT_CONTENT",
-//                 recipientProviders: [
-//                     [$class: "CulpritsRecipientProvider"],
-//                     [$class: "DevelopersRecipientProvider"],
-//                     [$class: "RequesterRecipientProvider"]
-//                 ],
-//                 replyTo: "$DEFAULT_REPLYTO",
-//                 to: "$DEFAULT_RECIPIENTS"
-//         }
-//     }
+    post {
+        success {
+            slackSend (color: '#2eb886', message: "Stable job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
+        }
+
+        changed {
+            emailext subject: '$DEFAULT_SUBJECT',
+                     body: '$DEFAULT_CONTENT',
+                     replyTo: '$DEFAULT_REPLYTO',
+                     to: '$DEFAULT_RECIPIENTS'
+        }
+
+        failure {
+            slackSend (color: '#FF0000', message: "Unstable job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
+
+            emailext subject: '$DEFAULT_SUBJECT',
+                     body: '$DEFAULT_CONTENT',
+                     replyTo: '$DEFAULT_REPLYTO',
+                     to: '$DEFAULT_RECIPIENTS'
+        }
+    }
 }
 
