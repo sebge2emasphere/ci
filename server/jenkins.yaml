@@ -176,6 +176,10 @@ unclassified:
     defaultSuffix: "@emasphere.com"
     smtpHost: "email-smtp.eu-west-1.amazonaws.com"
     useSsl: false
+    authentication:
+      password: "{AQAAABAAAABwbBYLSBONbqA1wbYlZeb7AB8IH2z9S5MKMt+0X0Zvo2OqK/hNLGK39mc0yClyBj8Jb7WvE4v8G4BIW1uedRpnq0YmZz2sOmQnm5MDw34BbINFld1hdSzgikbHcdrHQsa3TyAGzX4IfQeJ4K1Itiipqp7b+u4E+oEYTG/rIDHzOmc=}"
+      username: "AKIA4HIBN7SKML5BBRNX"
+    smtpPort: "587"
   mavenModuleSet:
     globalMavenOpts: "-Xmx3000m"
     localRepository: "default"
@@ -242,7 +246,7 @@ tool:
 jobs:
   - script: >
       pipelineJob('accounting-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/accounting', 'SERVICE_MODULE_NAME': 'accounting-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/accounting/', 'ROOT_POM_PATH': 'server/accounting/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -260,7 +264,7 @@ jobs:
       }
   - script: >
       pipelineJob('api-gateway-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'api-gateway-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/', 'ROOT_POM_PATH': 'server/api-gateway-service/pom.mxl')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -278,7 +282,25 @@ jobs:
       }
   - script: >
       pipelineJob('collaboration-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/collaboration', 'SERVICE_MODULE_NAME': 'collaboration-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/collaboration/', 'ROOT_POM_PATH': 'server/collaboration-service/pom.xml')
+          definition {
+              cpsScm {
+                  scriptPath 'jobs/develop/main-app/Jenkinsfile'
+                  scm {
+                    git {
+                        remote {
+                          url 'https://github.com/sebge2emasphere/jenkins.git'
+                          credentials('github-user-token')
+                        }
+                        branch 'master'
+                    }
+                  }
+              }
+          }
+      }
+  - script: >
+      pipelineJob('common-develop') {
+          environmentVariables('MODULE_ROOT_PATH': 'server/common/', 'ROOT_POM_PATH': 'server/common/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -296,7 +318,7 @@ jobs:
       }
   - script: >
       pipelineJob('configuration-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/config', 'SERVICE_MODULE_NAME': 'config-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/config/', 'ROOT_POM_PATH': 'server/config-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -314,7 +336,7 @@ jobs:
       }
   - script: >
       pipelineJob('connector-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/connector', 'SERVICE_MODULE_NAME': 'connector-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/connector/', 'ROOT_POM_PATH': 'server/connector-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -332,7 +354,7 @@ jobs:
       }
   - script: >
       pipelineJob('dashboard-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'dashboard-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/', 'ROOT_POM_PATH': 'server/dashboard-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -350,7 +372,7 @@ jobs:
       }
   - script: >
       pipelineJob('data-visualization-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/data-visualization', 'SERVICE_MODULE_NAME': 'data-visualization-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/data-visualization/', 'ROOT_POM_PATH': 'server/data-visualization-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -368,7 +390,7 @@ jobs:
       }
   - script: >
       pipelineJob('directory-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/directory', 'SERVICE_MODULE_NAME': 'directory-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/directory/', 'ROOT_POM_PATH': 'server/directory-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -386,7 +408,7 @@ jobs:
       }
   - script: >
       pipelineJob('export-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'export-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/', 'ROOT_POM_PATH': 'server/export-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -404,7 +426,7 @@ jobs:
       }
   - script: >
       pipelineJob('forecast-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/forecast', 'SERVICE_MODULE_NAME': 'forecast-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/forecast/', 'ROOT_POM_PATH': 'server/forecast-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -422,7 +444,7 @@ jobs:
       }
   - script: >
       pipelineJob('gateway-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'gateway-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/', 'ROOT_POM_PATH': 'server/gateway-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -440,7 +462,7 @@ jobs:
       }
   - script: >
       pipelineJob('integration-gateway-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/integration', 'SERVICE_MODULE_NAME': 'integration-gateway')
+          environmentVariables('MODULE_ROOT_PATH': 'server/integration/', 'ROOT_POM_PATH': 'server/integration-gateway/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -458,7 +480,7 @@ jobs:
       }
   - script: >
       pipelineJob('job-execution-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/job-execution', 'SERVICE_MODULE_NAME': 'job-execution-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/job-execution/', 'ROOT_POM_PATH': 'server/job-execution-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -476,7 +498,7 @@ jobs:
       }
   - script: >
       pipelineJob('kpi-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/kpi', 'SERVICE_MODULE_NAME': 'kpi-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/kpi/', 'ROOT_POM_PATH': 'server/kpi-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -494,7 +516,7 @@ jobs:
       }
   - script: >
       pipelineJob('mobile-gateway-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server', 'SERVICE_MODULE_NAME': 'mobile-gateway-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/', 'ROOT_POM_PATH': 'server/mobile-gateway-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -512,7 +534,7 @@ jobs:
       }
   - script: >
       pipelineJob('operational-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/operational', 'SERVICE_MODULE_NAME': 'operational-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/operational/', 'ROOT_POM_PATH': 'server/operational-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'
@@ -530,7 +552,7 @@ jobs:
       }
   - script: >
       pipelineJob('situation-service-develop') {
-          environmentVariables('SERVICE_ROOT_PATH': 'server/situation', 'SERVICE_MODULE_NAME': 'situation-service')
+          environmentVariables('MODULE_ROOT_PATH': 'server/situation/', 'ROOT_POM_PATH': 'server/situation-service/pom.xml')
           definition {
               cpsScm {
                   scriptPath 'jobs/develop/main-app/Jenkinsfile'

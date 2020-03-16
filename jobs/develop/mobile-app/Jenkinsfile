@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            label 'mobile-build'
+            label 'mobile-app-job'
             yaml """
 spec:
   imagePullSecrets:

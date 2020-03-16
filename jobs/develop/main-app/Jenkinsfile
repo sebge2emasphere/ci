@@ -1,15 +1,13 @@
-mainPom = "${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml"
-
 pipeline {
     agent {
         kubernetes {
-            label 'mobile-build'
+            label 'main-develop-job'
             yaml """
 spec:
   imagePullSecrets:
     - name: com.emasphere.dev.ecr
   containers:
-  - name: nodejs
+  - name: maven
     image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-container:1.0.0
     imagePullPolicy: Always
     command:
@@ -42,29 +40,35 @@ spec:
                     [url: "https://github.com/EMAsphere/emasphere.git", credentialsId: "github-user-token"]
                 ],
                 extensions: [
-                    [$class: "PathRestriction", excludedRegions: "", includedRegions: "${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/.*"]
+                    [$class: "PathRestriction", excludedRegions: "", includedRegions: "${MODULE_ROOT_PATH}/.*"]
                 ]
                 ])
             }
         }
         stage("Build") {
             steps {
-                withMaven(maven: "Maven 3") {
-                    sh "mvn clean install -f ${mainPom} -B -DskipTests -Pci --also-make"
+                container('maven') {
+                    withMaven(maven: "Maven 3") {
+                        sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci --also-make"
+                    }
                 }
             }
         }
         stage("Test") {
             steps {
-                withMaven(maven: "Maven 3") {
-                    sh "mvn test -f ${mainPom} -B -Pci -DskipTests"
+                container('maven') {
+                    withMaven(maven: "Maven 3") {
+                        sh "mvn test -f ${ROOT_POM_PATH} -B -Pci -DskipTests"
+                    }
                 }
             }
         }
         stage("Install") {
             steps {
-                withMaven(maven: "Maven 3") {
-                    sh "mvn install -f ${mainPom} -B -DskipTests -Pci"
+                container('maven') {
+                    withMaven(maven: "Maven 3") {
+                        sh "mvn install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
+                    }
                 }
             }
         }
