@@ -47,7 +47,7 @@ spec:
 
     post {
         success {
-            slackSend (color: '#00FF00', message: "SUCCESSFUL: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
+            slackSend (color: '#2eb886', message: "Stable job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
         }
 
         changed {
@@ -58,7 +58,7 @@ spec:
         }
 
         failure {
-            slackSend (color: '#FF0000', message: "FAILED: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
+            slackSend (color: '#FF0000', message: "Unstable job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
 
             emailext subject: '$DEFAULT_SUBJECT',
                      body: '$DEFAULT_CONTENT',
