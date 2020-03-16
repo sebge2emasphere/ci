@@ -1,3 +1,5 @@
+mainPom = "${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml"
+
 pipeline {
     agent {
         kubernetes {
@@ -34,54 +36,35 @@ spec:
                 script {
                     properties([pipelineTriggers([snapshotDependencies(), [$class: "GitHubPushTrigger"]])])
                 }
-                checkout([
-                        $class: "GitSCM",
-                        branches: [[name: "*/develop"]],
-                        userRemoteConfigs: [
-                        [url: "https://github.com/EMAsphere/emasphere.git", credentialsId: "github-user-token"]
-                    ],
-                    extensions: [
-                        [$class: "PathRestriction", excludedRegions: "", includedRegions: (${SERVICE_ROOT_PATH} == 'server') ? "${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/.*" : "${SERVICE_ROOT_PATH}/.*"]
-                    ]
+                checkout([$class: "GitSCM",
+                    branches: [[name: "*/develop"]],
+                    userRemoteConfigs: [
+                    [url: "https://github.com/EMAsphere/emasphere.git", credentialsId: "github-user-token"]
+                ],
+                extensions: [
+                    [$class: "PathRestriction", excludedRegions: "", includedRegions: "${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/.*"]
+                ]
                 ])
             }
         }
         stage("Build") {
             steps {
                 withMaven(maven: "Maven 3") {
-                    script {
-                        if (${SERVICE_ROOT_PATH} == 'server') {
-                            sh "mvn clean install -f ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml -B -DskipTests -Pci"
-                        } else {
-                            sh "mvn clean install -f ${SERVICE_ROOT_PATH}/pom.xml -B -DskipTests -Pci"
-                        }
-                    }
+                    sh "mvn clean install -f ${mainPom} -B -DskipTests -Pci --also-make"
                 }
             }
         }
         stage("Test") {
             steps {
                 withMaven(maven: "Maven 3") {
-                    script {
-                        if (${SERVICE_ROOT_PATH} == 'server') {
-                            sh "mvn test -f ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml -B -Pci"
-                        } else {
-                            sh "mvn test -f ${SERVICE_ROOT_PATH}/pom.xml -B -Pci"
-                        }
-                    }
+                    sh "mvn test -f ${mainPom} -B -Pci -DskipTests"
                 }
             }
         }
         stage("Install") {
             steps {
                 withMaven(maven: "Maven 3") {
-                    script {
-                        if (${SERVICE_ROOT_PATH} == 'server') {
-                            sh "mvn install -f ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml -B -DskipTests -Pci"
-                        } else {
-                            sh "mvn install -f ${SERVICE_ROOT_PATH}/pom.xml -B -DskipTests -Pci"
-                        }
-                    }
+                    sh "mvn install -f ${mainPom} -B -DskipTests -Pci"
                 }
             }
         }
