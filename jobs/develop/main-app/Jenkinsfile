@@ -49,10 +49,12 @@ spec:
         stage("Build") {
             steps {
                 withMaven(maven: "Maven 3") {
-                    if (${SERVICE_ROOT_PATH} == 'server') {
-                        sh "mvn clean install -f ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml -B -DskipTests -Pci"
-                    } else {
-                        sh "mvn clean install -f ${SERVICE_ROOT_PATH}/pom.xml -B -DskipTests -Pci"
+                    script {
+                        if (${SERVICE_ROOT_PATH} == 'server') {
+                            sh "mvn clean install -f ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml -B -DskipTests -Pci"
+                        } else {
+                            sh "mvn clean install -f ${SERVICE_ROOT_PATH}/pom.xml -B -DskipTests -Pci"
+                        }
                     }
                 }
             }
@@ -60,10 +62,12 @@ spec:
         stage("Test") {
             steps {
                 withMaven(maven: "Maven 3") {
-                    if (${SERVICE_ROOT_PATH} == 'server') {
-                        sh "mvn test -f ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml -B -Pci"
-                    } else {
-                        sh "mvn test -f ${SERVICE_ROOT_PATH}/pom.xml -B -Pci"
+                    script {
+                        if (${SERVICE_ROOT_PATH} == 'server') {
+                            sh "mvn test -f ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml -B -Pci"
+                        } else {
+                            sh "mvn test -f ${SERVICE_ROOT_PATH}/pom.xml -B -Pci"
+                        }
                     }
                 }
             }
@@ -71,10 +75,12 @@ spec:
         stage("Install") {
             steps {
                 withMaven(maven: "Maven 3") {
-                    if (${SERVICE_ROOT_PATH} == 'server') {
-                        sh "mvn install -f ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml -B -DskipTests -Pci"
-                    } else {
-                        sh "mvn install -f ${SERVICE_ROOT_PATH}/pom.xml -B -DskipTests -Pci"
+                    script {
+                        if (${SERVICE_ROOT_PATH} == 'server') {
+                            sh "mvn install -f ${SERVICE_ROOT_PATH}/${SERVICE_MODULE_NAME}/pom.xml -B -DskipTests -Pci"
+                        } else {
+                            sh "mvn install -f ${SERVICE_ROOT_PATH}/pom.xml -B -DskipTests -Pci"
+                        }
                     }
                 }
             }
