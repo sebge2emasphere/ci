@@ -46,7 +46,9 @@ spec:
     }
 
     post {
-        slackSend
+        always {
+            slackSend
+        }
 
         changed {
             emailext subject: '$DEFAULT_SUBJECT',
