@@ -47,7 +47,7 @@ spec:
 
     post {
         always {
-            slackSend
+            slackSend message: "Build ${env.JOB_NAME} [${env.BUILD_NUMBER}] ended with status ${env.BUILD_STATUS} (${env.BUILD_URL})"
         }
 
         changed {
