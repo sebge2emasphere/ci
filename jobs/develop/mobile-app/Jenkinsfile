@@ -29,20 +29,20 @@ spec:
                     url: 'https://github.com/EMAsphere/mobile.git'
             }
         }
-        stage('Install') {
-            steps {
-                container('nodejs') {
-                    sh "npm install"
-                }
-            }
-        }
-        stage('Build') {
-            steps {
-                container('nodejs') {
-                    sh "npm run build"
-                }
-            }
-        }
+//         stage('Install') {
+//             steps {
+//                 container('nodejs') {
+//                     sh "npm install"
+//                 }
+//             }
+//         }
+//         stage('Build') {
+//             steps {
+//                 container('nodejs') {
+//                     sh "npm run build"
+//                 }
+//             }
+//         }
     }
 
     post {
