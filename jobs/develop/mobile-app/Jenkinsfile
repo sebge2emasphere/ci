@@ -56,7 +56,7 @@ spec:
             emailext subject: '$DEFAULT_SUBJECT',
                      body: '$DEFAULT_CONTENT',
                      replyTo: '$DEFAULT_REPLYTO',
-                     to: 'sgerard@emasphere.com'
+                     to: '$DEFAULT_RECIPIENTS'
         }
 
         failure {
