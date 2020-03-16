@@ -52,20 +52,20 @@ spec:
                 }
             }
         }
-//         stage("Test") {
-//             steps {
-//                 withMaven(maven: "Maven 3") {
-//                     sh "cd ${SERVICE_ROOT_PATH} && mvn test -B -Pci -DskipTests "
-//                 }
-//             }
-//         }
-//         stage("Deploy") {
-//             steps {
-//                 withMaven(maven: "Maven 3") {
-//                     sh "cd ${SERVICE_ROOT_PATH} && mvn install -B -DskipTests -Pci"
-//                 }
-//             }
-//         }
+        stage("Test") {
+            steps {
+                withMaven(maven: "Maven 3") {
+                    sh "cd ${SERVICE_ROOT_PATH} && mvn test -B -Pci -DskipTests "
+                }
+            }
+        }
+        stage("Install") {
+            steps {
+                withMaven(maven: "Maven 3") {
+                    sh "cd ${SERVICE_ROOT_PATH} && mvn install -B -DskipTests -Pci"
+                }
+            }
+        }
     }
 
     post {
