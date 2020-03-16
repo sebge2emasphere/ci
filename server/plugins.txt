@@ -5,6 +5,7 @@ slack:2.37
 email-ext:2.69
 nodejs:1.3.4
 build-timeout:1.19.1
+naginator:1.18
 embeddable-build-status:2.0.3
 github:1.29.5
 github-branch-source:2.6.0
@@ -31,4 +32,6 @@ blueocean-i18n:1.22.0
 job-dsl:1.77
 envinject:2.3.0
 kubernetes:1.25.0
+kubernetes-credentials:0.6.2
+kubernetes-credentials-provider:0.13
 junit:1.28

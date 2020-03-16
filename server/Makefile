@@ -1,14 +1,11 @@
-AWS_PROFILE=dev
-KUBECONFIG=~/.kube/config-eks-dev
-
 all:
-	@docker build -t 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-server:1.0.0 .
+	@docker build -t $(SERVER_IMAGE) .
 
 push:
 	@docker push 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-server:1.0.0
 
-deploy:
-	@kubectl apply -f ./k8s/
+apply:
+	kubectl apply -f ./k8s/
 
 setup:
 	kubectl apply -f k8s/namespace.yaml
