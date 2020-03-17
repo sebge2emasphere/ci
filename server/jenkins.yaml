@@ -151,7 +151,7 @@ unclassified:
     maxAttachmentSize: -1
     maxAttachmentSizeMb: 0
     precedenceBulk: false
-    smtpServer: "email-smtp.eu-west-1.amazonaws.com"
+    smtpServer: "smtp-relay"
     useSsl: false
     watchingEnabled: false
   gitHubConfiguration:
@@ -174,12 +174,9 @@ unclassified:
   mailer:
     charset: "UTF-8"
     defaultSuffix: "@emasphere.com"
-    smtpHost: "email-smtp.eu-west-1.amazonaws.com"
+    smtpHost: "smtp-relay"
     useSsl: false
-    authentication:
-      password: "{AQAAABAAAABwbBYLSBONbqA1wbYlZeb7AB8IH2z9S5MKMt+0X0Zvo2OqK/hNLGK39mc0yClyBj8Jb7WvE4v8G4BIW1uedRpnq0YmZz2sOmQnm5MDw34BbINFld1hdSzgikbHcdrHQsa3TyAGzX4IfQeJ4K1Itiipqp7b+u4E+oEYTG/rIDHzOmc=}"
-      username: "AKIA4HIBN7SKML5BBRNX"
-    smtpPort: "587"
+    smtpPort: "25"
   mavenModuleSet:
     globalMavenOpts: "-Xmx3000m"
     localRepository: "default"

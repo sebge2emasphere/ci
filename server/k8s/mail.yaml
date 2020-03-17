@@ -1,0 +1,52 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: smtp-relay
+  namespace: ci
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: smtp-relay
+    spec:
+      imagePullSecrets:
+        - name: com.emasphere.dev.ecr
+      containers:
+        - name: smtp-relay
+          image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/mail-relay:1.0.0
+          imagePullPolicy: Always
+          env:
+            - name: SMTP_RELAY_HOST
+              value: email-smtp.eu-west-1.amazonaws.com
+            - name: SMTP_RELAY_PORT
+              value: "587"
+            - name: SMTP_RELAY_MYHOSTNAME
+              value: smtp-relay
+            - name: SMTP_RELAY_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mail-credentials
+                  key: username
+            - name: SMTP_RELAY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mail-credentials
+                  key: password
+          ports:
+            - containerPort: 25
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ci
+  name: smtp-relay
+spec:
+  type: NodePort
+  ports:
+    - name: smtp
+      port: 25
+  selector:
+    app: smtp-relay
