@@ -230,6 +230,8 @@ tool:
                     id: "11.1.0"
                     npmPackagesRefreshHours: 72
   pipelineMaven:
+    jdbcCredentialsId: "postgres-credentials"
+    jdbcUrl: "jdbc:postgresql://postgres:5432/jenkins"
     publisherOptions:
       - pipelineGraphPublisher:
           includeReleaseVersions: true

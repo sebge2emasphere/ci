@@ -35,3 +35,4 @@ kubernetes:1.25.0
 kubernetes-credentials:0.6.2
 kubernetes-credentials-provider:0.13
 junit:1.28
+postgresql-api:42.2.5
