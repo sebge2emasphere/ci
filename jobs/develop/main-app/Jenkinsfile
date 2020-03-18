@@ -69,7 +69,7 @@ spec:
             steps {
                 container('main') {
                     withMaven() {
-                        sh "mvn test -f ${ROOT_POM_PATH} -B -Pci -DskipTests"
+                        sh "mvn test -f ${ROOT_POM_PATH} -B -Pci"
                     }
                 }
             }
