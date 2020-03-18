@@ -7,7 +7,7 @@ spec:
   imagePullSecrets:
     - name: com.emasphere.dev.ecr
   containers:
-  - name: maven
+  - name: main
     image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-container:1.0.0
     imagePullPolicy: Always
     command:
@@ -47,7 +47,7 @@ spec:
         }
         stage("Build") {
             steps {
-                container('maven') {
+                container('main') {
                     withMaven() {
                         sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                     }
@@ -56,7 +56,7 @@ spec:
         }
         stage("Test") {
             steps {
-                container('maven') {
+                container('main') {
                     withMaven() {
                         sh "mvn test -f ${ROOT_POM_PATH} -B -Pci -DskipTests"
                     }
@@ -65,7 +65,7 @@ spec:
         }
         stage("Install") {
             steps {
-                container('maven') {
+                container('main') {
                     withMaven() {
                         sh "mvn install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                     }
