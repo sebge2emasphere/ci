@@ -48,8 +48,8 @@ spec:
         stage("Build") {
             steps {
                 container('maven') {
-                    withMaven(maven: "Maven 3") {
-                        sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci --also-make"
+                    withMaven() {
+                        sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                     }
                 }
             }
@@ -57,7 +57,7 @@ spec:
         stage("Test") {
             steps {
                 container('maven') {
-                    withMaven(maven: "Maven 3") {
+                    withMaven() {
                         sh "mvn test -f ${ROOT_POM_PATH} -B -Pci -DskipTests"
                     }
                 }
@@ -66,7 +66,7 @@ spec:
         stage("Install") {
             steps {
                 container('maven') {
-                    withMaven(maven: "Maven 3") {
+                    withMaven() {
                         sh "mvn install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                     }
                 }
