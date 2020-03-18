@@ -10,6 +10,9 @@ spec:
   - name: main
     image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-container:1.0.0
     imagePullPolicy: Always
+    resources:
+    limits:
+      memory: "1000Mi"
     command:
     - cat
     tty: true
