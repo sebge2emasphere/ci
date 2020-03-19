@@ -6,6 +6,11 @@ pipeline {
 spec:
   imagePullSecrets:
     - name: com.emasphere.dev.ecr
+  volumes:
+    - name: m2-volume
+      persistentVolumeClaim:
+       claimName: jenkins-node-container-pv-claim
+       namespace: ci
   containers:
   - name: main
     image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/jenkins-container:1.0.0
@@ -17,7 +22,7 @@ spec:
     - cat
     tty: true
     volumeMounts:
-      - name: jenkins-node-container-pv-volume
+      - name: m2-volume
         mountPath: /root/.m2
         subPath: jenkins-node-container-m2
   - name: redis
