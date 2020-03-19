@@ -16,6 +16,10 @@ spec:
     command:
     - cat
     tty: true
+    volumeMounts:
+      - name: jenkins-node-container-pv-volume
+        mountPath: /root/.m2
+        subPath: jenkins-node-container-m2
   - name: redis
     image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/redis:4.0.14
     imagePullPolicy: Always
@@ -24,13 +28,6 @@ spec:
     command:
     - cat
     tty: true
-  volumeMounts:
-    - name: m2-home
-      mountPath: /root/.m2
-  volumes:
-    - name: m2-home
-      persistentVolumeClaim:
-      claimName: jenkins-node-container-claim
 """
         }
     }
