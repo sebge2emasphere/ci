@@ -25,10 +25,10 @@ spec:
     - cat
     tty: true
   volumeMounts:
-    - name: m2Home
+    - name: m2-home
       mountPath: /home/jenkins/.m2
   volumes:
-    - name: m2Home
+    - name: m2-home
       persistentVolumeClaim:
       claimName: jenkins-node-container-claim
 """
