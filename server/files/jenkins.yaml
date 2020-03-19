@@ -168,6 +168,107 @@ unclassified:
     globalConfigName: "Jenkins"
     showEntireCommitSummaryInChanges: false
     useExistingAccountWithSameEmail: false
+  globalConfigFiles:
+    configs:
+      - mavenSettings:
+          comment: "EMAsphere config"
+          content: |+
+            <?xml version="1.0" encoding="UTF-8"?>
+
+            <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+                <profiles>
+                    <profile>
+                        <id>ema-nexus</id>
+                        <activation>
+                            <activeByDefault>true</activeByDefault>
+                        </activation>
+                        <repositories>
+                            <repository>
+                                <id>emaNexus</id>
+                                <name>EMAsphere Nexus</name>
+                                <releases>
+                                    <enabled>true</enabled>
+                                    <updatePolicy>never</updatePolicy>
+                                    <checksumPolicy>warn</checksumPolicy>
+                                </releases>
+                                <snapshots>
+                                    <enabled>true</enabled>
+                                    <updatePolicy>never</updatePolicy>
+                                    <checksumPolicy>warn</checksumPolicy>
+                                </snapshots>
+                                <url>http://repo.emasphere.com/repository/maven-public</url>
+                                <layout>default</layout>
+                            </repository>
+                            <repository>
+                                <id>emaNexusThird</id>
+                                <name>EMAsphere Nexus ThirdParty</name>
+                                <releases>
+                                    <enabled>true</enabled>
+                                    <updatePolicy>never</updatePolicy>
+                                    <checksumPolicy>warn</checksumPolicy>
+                                </releases>
+                                <snapshots>
+                                    <enabled>false</enabled>
+                                    <updatePolicy>never</updatePolicy>
+                                    <checksumPolicy>warn</checksumPolicy>
+                                </snapshots>
+                                <url>http://repo.emasphere.com/repository/thirdparty</url>
+                                <layout>default</layout>
+                            </repository>
+                            <repository>
+                                <id>emaNexusRelease</id>
+                                <name>EMAsphere Nexus Releases</name>
+                                <releases>
+                                    <enabled>true</enabled>
+                                    <updatePolicy>never</updatePolicy>
+                                    <checksumPolicy>warn</checksumPolicy>
+                                </releases>
+                                <snapshots>
+                                    <enabled>false</enabled>
+                                    <updatePolicy>never</updatePolicy>
+                                    <checksumPolicy>warn</checksumPolicy>
+                                </snapshots>
+                                <url>http://repo.emasphere.com/repository/maven-releases</url>
+                                <layout>default</layout>
+                            </repository>
+                        </repositories>
+                        <pluginRepositories>
+                            <pluginRepository>
+                                <id>emaNexusPlugins</id>
+                                <name>EMAsphere Nexus</name>
+                                <releases>
+                                    <enabled>true</enabled>
+                                    <updatePolicy>never</updatePolicy>
+                                    <checksumPolicy>warn</checksumPolicy>
+                                </releases>
+                                <snapshots>
+                                    <enabled>true</enabled>
+                                    <updatePolicy>always</updatePolicy>
+                                    <checksumPolicy>warn</checksumPolicy>
+                                </snapshots>
+                                <url>http://repo.emasphere.com/repository/maven-public</url>
+                                <layout>default</layout>
+                            </pluginRepository>
+                        </pluginRepositories>
+                    </profile>
+                </profiles>
+            </settings>
+
+          id: "002b7018-8317-4772-bc20-cf9923ed1c50"
+          isReplaceAll: true
+          name: "default-ema"
+          providerId: "org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig"
+          serverCredentialMappings:
+            - credentialsId: "repo-credentials"
+              serverId: "emaNexusPlugins"
+            - credentialsId: "repo-credentials"
+              serverId: "emaNexus"
+            - credentialsId: "repo-credentials"
+              serverId: "emaNexusThird"
+            - credentialsId: "repo-credentials"
+              serverId: "emaNexusRelease"
   location:
     adminAddress: "build-dev@emasphere.com"
     url: "http://build-dev.emasphere.com/"
