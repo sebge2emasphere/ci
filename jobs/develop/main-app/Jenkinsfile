@@ -68,7 +68,7 @@ spec:
         stage("Build") {
             steps {
                 container('main') {
-                    withMaven() {
+                    withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
                         sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                     }
                 }
@@ -77,7 +77,7 @@ spec:
         stage("Test") {
             steps {
                 container('main') {
-                    withMaven() {
+                    withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
                         sh "mvn test -f ${ROOT_POM_PATH} -B -Pci"
                     }
                 }
@@ -86,7 +86,7 @@ spec:
         stage("Install") {
             steps {
                 container('main') {
-                    withMaven() {
+                    withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
                         sh "mvn install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                     }
                 }
