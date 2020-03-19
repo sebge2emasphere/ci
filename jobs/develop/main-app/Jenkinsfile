@@ -26,19 +26,18 @@ spec:
         mountPath: /root/.m2
         subPath: agent-m2-home
   - name: redis
-    image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/redis:4.0.14
-    imagePullPolicy: Always
+    image: redis:4.0.14-alpine3.11
     ports:
     - containerPort: 6379
     command:
-    - cat
+    - redis-server --daemonize yes
     tty: true
   - name: rabbitmq
     image: rabbitmq:3.6-alpine
+    command:
+    - rabbitmq-server
     ports:
     - containerPort: 5672
-    command:
-    - cat
     tty: true
 """
         }
