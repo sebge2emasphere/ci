@@ -24,7 +24,7 @@ spec:
     volumeMounts:
       - name: m2-volume
         mountPath: /root/.m2
-        subPath: jenkins-node-container-m2
+        subPath: agent-m2-home
   - name: redis
     image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/redis:4.0.14
     imagePullPolicy: Always

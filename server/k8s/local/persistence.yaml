@@ -1,0 +1,62 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgres-pv-volume
+  namespace: ci
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 500m
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data"
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-pv-claim
+  namespace: ci
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500m
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: jenkins-node-container-pv-volume
+  namespace: ci
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 1000m
+  accessModes:
+    - ReadWriteMany
+  claimRef:
+    namespace: default
+    name: jenkins-node-container-pv-claim
+  hostPath:
+    path: "/data"
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: jenkins-node-container-pv-claim
+  namespace: ci
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1000m
