@@ -33,6 +33,13 @@ spec:
     command:
     - cat
     tty: true
+  - name: rabbitmq
+    image: rabbitmq:3.6-alpine
+    ports:
+    - containerPort: 5672
+    command:
+    - cat
+    tty: true
 """
         }
     }
