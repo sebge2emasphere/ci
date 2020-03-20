@@ -1,5 +1,9 @@
 all:
 	make -C ./jenkins/docker
+	make -C ./jenkins/containers/jenkins-container
+	make -C ./jenkins/containers/mail-container
+	make -C ./jenkins/containers/nodejs-container
+	make -C ./jenkins/containers/postgres-container
 	make -C ./sonar/docker
 
 apply:
