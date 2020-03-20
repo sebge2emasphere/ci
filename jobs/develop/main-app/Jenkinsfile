@@ -92,8 +92,10 @@ spec:
 //         }
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv('EMAsphere SonarQube') {
-                  sh 'mvn sonar:sonar'
+                container('main') {
+                    withSonarQubeEnv('EMAsphere SonarQube') {
+                      sh 'mvn sonar:sonar'
+                    }
                 }
             }
         }
