@@ -94,7 +94,7 @@ spec:
             steps {
                 container('main') {
                     withSonarQubeEnv('EMAsphere SonarQube') {
-                      sh 'mvn sonar:sonar'
+                      sh 'mvn sonar:sonar -f ${ROOT_POM_PATH} -B -Pci'
                     }
                 }
             }
