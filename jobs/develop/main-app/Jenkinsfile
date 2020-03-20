@@ -81,13 +81,18 @@ spec:
                 }
             }
         }
-        stage("Test") {
-            steps {
-                container('main') {
-                    withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
-                        sh "mvn test -f ${ROOT_POM_PATH} -B -Pci"
-                    }
-                }
+//         stage("Test") {
+//             steps {
+//                 container('main') {
+//                     withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
+//                         sh "mvn test -f ${ROOT_POM_PATH} -B -Pci"
+//                     }
+//                 }
+//             }
+//         }
+        stage('SonarQube analysis') {
+            withSonarQubeEnv('EMAsphere SonarQube') {
+              sh 'mvn sonar:sonar'
             }
         }
         stage("Install") {
