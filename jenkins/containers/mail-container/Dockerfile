@@ -4,7 +4,7 @@ FROM alpine:3.4
 RUN apk add --no-cache ca-certificates postfix rsyslog supervisor && /usr/bin/newaliases
 RUN rm -rf /var/cache/apk/*
 
-COPY files/ /
+COPY files /
 
 EXPOSE 25
 
