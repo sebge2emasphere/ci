@@ -1,0 +1,55 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: ci
+  name: sonar-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sonar-server
+    spec:
+      imagePullSecrets:
+        - name: com.emasphere.dev.ecr
+      containers:
+        - name: sonar-server
+          image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/sonar:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - name: http-port
+              containerPort: 9000
+          env:
+            - name: SONAR_JDBC_URL
+              value: jdbc:postgresql://postgres:5432/sonar
+            - name: SONAR_JDBC_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: username
+            - name: SONAR_JDBC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+            - name: sonar.search.javaAdditionalOpts
+              value: -Dnode.store.allow_mmapfs=false
+          resources:
+            limits:
+              memory: "2000Mi"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ci
+  name: sonar-server
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 9000
+      targetPort: 9000
+  selector:
+    app: sonar-server
