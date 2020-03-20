@@ -34,9 +34,26 @@ spec:
                   key: password
             - name: sonar.search.javaAdditionalOpts
               value: -Dnode.store.allow_mmapfs=false
+#        volumeMounts:
+#          - mountPath: "/opt/sonarqube/conf/"
+#            name: sonarqube-conf
+#          - mountPath: "/opt/sonarqube/data/"
+#            name: sonarqube-data
+#          - mountPath: "/opt/sonarqube/extensions/"
+#            name: sonarqube-extensions
           resources:
             limits:
               memory: "2000Mi"
+#      volumes:
+#        - name: sonarqube-conf
+#          persistentVolumeClaim:
+#            claimName: sonarqube-conf-pv-claim
+#        - name: sonarqube-data
+#          persistentVolumeClaim:
+#            claimName: sonarqube-data-pv-claim
+#        - name: sonarqube-extensions
+#          persistentVolumeClaim:
+#            claimName: sonarqube-extensions-pv-claim
 
 ---
 
