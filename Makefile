@@ -6,6 +6,14 @@ all:
 	make -C ./jenkins/containers/postgres-container
 	make -C ./sonar/docker
 
+push:
+	make -C ./jenkins/docker push
+	make -C ./jenkins/containers/jenkins-container push
+	make -C ./jenkins/containers/mail-container push
+	make -C ./jenkins/containers/nodejs-container push
+	make -C ./jenkins/containers/postgres-container push
+	make -C ./sonar/docker push
+
 apply:
 	kubectl apply -f ./k8s/ -f ./k8s/local
 
