@@ -79,8 +79,9 @@ spec:
                         sh "echo $PATH"
                         sh "ls -al /usr/share/sencha"
                         sh "/usr/share/sencha/bin/sencha"
+                        sh 'export PATH="/usr/share/sencha/bin:$PATH"'
                         sh "sencha"
-                        sh "export JAVA_TOOL_OPTIONS='' && mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
+                        sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                     }
                 }
             }
