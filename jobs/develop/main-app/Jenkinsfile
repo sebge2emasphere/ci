@@ -78,6 +78,9 @@ spec:
                     withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
                         withEnv(['PATH+EXTRA=$CONTAINER_PATH']) {
                             sh "echo beginning $PATH"
+                            sh "je vais executer /usr/share/sencha/bin/"
+                            sh "/usr/share/sencha/bin/"
+                            echo "je vais executer sencha"
                             sh "sencha"
                             sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                         }
