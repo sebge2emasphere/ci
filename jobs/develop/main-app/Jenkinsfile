@@ -81,6 +81,8 @@ spec:
                             sh "echo je vais executer /usr/share/sencha/bin/sencha"
                             sh "/usr/share/sencha/bin/sencha"
                             sh "whereis sencha"
+                            sh "ls -al /usr/share/sencha"
+                            sh "ls -al /usr/share/sencha/bin"
                             sh "echo $USER"
                             sh "which sencha"
                             sh "echo je vais executer sencha"
