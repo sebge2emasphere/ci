@@ -80,6 +80,7 @@ spec:
                         sh "ls -al /usr/share/sencha"
                         sh "/usr/share/sencha/bin/sencha"
                         sh 'export PATH="/usr/share/sencha/bin:$PATH"'
+                        sh "echo $PATH"
                         sh "sencha"
                         sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                     }
