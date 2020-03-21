@@ -58,6 +58,10 @@ spec:
     stages {
         stage("Cloning Repo") {
             steps {
+                sh "echo $PATH"
+                sh "echo $CONTAINER_PATH"
+
+
                 script {
                     properties([pipelineTriggers([snapshotDependencies(), [$class: "GitHubPushTrigger"]])])
                 }
@@ -77,6 +81,8 @@ spec:
                 container('main') {
                     withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
                         withEnv(['PATH+EXTRA=$CONTAINER_PATH']) {
+                            sh "echo $PATH"
+                            sh "echo $CONTAINER_PATH"
                             sh "export JAVA_TOOL_OPTIONS='' && mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                         }
                     }
