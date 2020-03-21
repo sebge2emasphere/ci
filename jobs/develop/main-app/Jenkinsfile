@@ -97,7 +97,7 @@ spec:
             steps {
                 container("main") {
                     withSonarQubeEnv("EMAsphere SonarQube") {
-                        sh "mvn sonar:sonar -B -DskipTests -Pci"
+                        sh "mvn sonar:sonar -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                         waitForQualityGate(webhookSecretId: "jenkins-sonarqube-webhook",  abortPipeline: true)
                         
                     }
