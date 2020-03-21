@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            label 'main-develop-job'
+            label "main-develop-job"
             yaml """
 spec:
   imagePullSecrets:
@@ -50,9 +50,9 @@ spec:
     }
 
     options {
-        buildDiscarder(logRotator(numToKeepStr: '5'))
+        buildDiscarder(logRotator(numToKeepStr: "5"))
         disableConcurrentBuilds()
-        timeout(time: 10, unit: 'MINUTES')
+        timeout(time: 10, unit: "MINUTES")
     }
 
     stages {
@@ -74,16 +74,11 @@ spec:
         }
         stage("Build") {
             steps {
-                container('main') {
-                    withEnv(['PATH+EXTRA=/usr/share/sencha/bin']) {
-                        sh "ruby -v"
-                        sh "./front/setup.sh"
-                    }
-
-                    withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
-                        withEnv(['PATH+EXTRA=/usr/share/sencha/bin']) {
+                container("main") {
+                    withMaven(mavenSettingsConfig: "002b7018-8317-4772-bc20-cf9923ed1c50") {
+                        withEnv(["PATH+EXTRA=/usr/share/sencha/bin"]) {
                             sh "echo beginning $PATH"
-                            sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
+                            sh "mvn clean package -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                         }
                     }
                 }
@@ -91,26 +86,28 @@ spec:
         }
         stage("Test") {
             steps {
-                container('main') {
-                    withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
+                container("main") {
+                    withMaven(mavenSettingsConfig: "002b7018-8317-4772-bc20-cf9923ed1c50") {
                         sh "mvn test -f ${ROOT_POM_PATH} -B -Pci"
                     }
                 }
             }
         }
-        stage('Code Analysis') {
+        stage("Code Analysis") {
             steps {
-                container('main') {
-                    withSonarQubeEnv('EMAsphere SonarQube') {
-                        sh 'mvn sonar:sonar -f ${ROOT_POM_PATH} -B -Pci'
+                container("main") {
+                    withSonarQubeEnv("EMAsphere SonarQube") {
+                        sh "mvn sonar:sonar -B -DskipTests -Pci"
+                        waitForQualityGate(webhookSecretId: "jenkins-sonarqube-webhook",  abortPipeline: true)
+                        
                     }
                 }
             }
         }
         stage("Install") {
             steps {
-                container('main') {
-                    withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
+                container("main") {
+                    withMaven(mavenSettingsConfig: "002b7018-8317-4772-bc20-cf9923ed1c50") {
                         sh "mvn install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                     }
                 }
@@ -120,23 +117,23 @@ spec:
 
     post {
         success {
-            slackSend (color: '#2eb886', message: "Stable job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
+            slackSend (color: "#2eb886", message: "Stable job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
         }
 
         changed {
-            emailext subject: '$DEFAULT_SUBJECT',
-                     body: '$DEFAULT_CONTENT',
-                     replyTo: '$DEFAULT_REPLYTO',
-                     to: '$DEFAULT_RECIPIENTS'
+            emailext subject: "$DEFAULT_SUBJECT",
+                     body: "$DEFAULT_CONTENT",
+                     replyTo: "$DEFAULT_REPLYTO",
+                     to: "$DEFAULT_RECIPIENTS"
         }
 
         failure {
-            slackSend (color: '#FF0000', message: "Unstable job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
+            slackSend (color: "#FF0000", message: "Unstable job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
 
-            emailext subject: '$DEFAULT_SUBJECT',
-                     body: '$DEFAULT_CONTENT',
-                     replyTo: '$DEFAULT_REPLYTO',
-                     to: '$DEFAULT_RECIPIENTS'
+            emailext subject: "$DEFAULT_SUBJECT",
+                     body: "$DEFAULT_CONTENT",
+                     replyTo: "$DEFAULT_REPLYTO",
+                     to: "$DEFAULT_RECIPIENTS"
         }
     }
 }
