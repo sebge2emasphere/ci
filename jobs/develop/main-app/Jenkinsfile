@@ -81,6 +81,7 @@ spec:
                             sh "echo je vais executer /usr/share/sencha/bin/sencha"
                             sh "/usr/share/sencha/bin/sencha"
                             sh "whereis sencha"
+                            sh "echo $USER"
                             sh "echo je vais executer sencha"
                             sh "sencha"
                             sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
