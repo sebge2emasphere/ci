@@ -73,10 +73,6 @@ spec:
             }
         }
         stage("Build") {
-            environment {
-                PATH = '/usr/share/sencha/bin:$PATH'
-                SENCHA_HOME = '/usr/share/sencha'
-            }
             steps {
                 container('main') {
                     withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
