@@ -86,6 +86,7 @@ spec:
                             sh "ls -al /usr/share/sencha/bin"
 //                             sh "echo $USER"
 //                             sh "which sencha"
+                            sh "id"
                             sh "echo je vais executer sencha"
                             sh "sencha"
                             sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
