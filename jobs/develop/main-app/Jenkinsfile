@@ -73,9 +73,6 @@ spec:
             }
         }
         stage("Build") {
-            environment {
-                JAVA_TOOL_OPTIONS = ''
-            }
             steps {
                 container('main') {
                     withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
