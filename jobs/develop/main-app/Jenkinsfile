@@ -75,20 +75,13 @@ spec:
         stage("Build") {
             steps {
                 container('main') {
+                    withEnv(['PATH+EXTRA=/usr/share/sencha/bin']) {
+                        sh "./front/setup.sh"
+                    }
+
                     withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
                         withEnv(['PATH+EXTRA=/usr/share/sencha/bin']) {
                             sh "echo beginning $PATH"
-//                             sh "echo je vais executer /usr/share/sencha/bin/sencha"
-//                             sh "/usr/share/sencha/bin/sencha"
-//                             sh "whereis -b sencha"
-//                             sh "whereis -B /usr/share/sencha/bin -f sencha"
-//                             sh "ls -al /usr/share/sencha"
-//                             sh "ls -al /usr/share/sencha/bin"
-//                             sh "echo $USER"
-//                             sh "which sencha"
-//                             sh "id"
-//                             sh "echo je vais executer sencha"
-                            sh "sencha"
                             sh "mvn clean install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                         }
                     }
