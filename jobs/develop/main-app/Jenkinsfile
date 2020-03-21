@@ -76,6 +76,7 @@ spec:
             steps {
                 container('main') {
                     withEnv(['PATH+EXTRA=/usr/share/sencha/bin']) {
+                        sh "ruby -v"
                         sh "./front/setup.sh"
                     }
 
