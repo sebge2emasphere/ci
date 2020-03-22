@@ -293,11 +293,13 @@ unclassified:
   sonarGlobalConfiguration:
     buildWrapperEnabled: false
     installations:
-      - name: "EMAsphere SonarQube"
+      - credentialsId: "jenkins-sonarqube-credentials"
+        name: "EMAsphere SonarQube"
         serverUrl: "http://sonar:9000"
         triggers:
           skipScmCause: false
-          skipUpstreamCause: false
+          skipUpstreamCause: true
+        webhookSecretId: "jenkins-sonarqube-webhook"
   timestamperConfig:
     allPipelines: false
     elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
