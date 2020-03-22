@@ -121,19 +121,19 @@ spec:
         }
 
         changed {
-            emailext subject: "${env.DEFAULT_SUBJECT}",
-                     body: "${env.DEFAULT_CONTENT}",
-                     replyTo: "${env.DEFAULT_REPLYTO}",
-                     to: "${env.DEFAULT_RECIPIENTS}"
+            emailext subject: "${DEFAULT_SUBJECT}",
+                     body: "${DEFAULT_CONTENT}",
+                     replyTo: "${DEFAULT_REPLYTO}",
+                     to: "${DEFAULT_RECIPIENTS}"
         }
 
         failure {
             slackSend (color: "#FF0000", message: "Unstable job ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
 
-            emailext subject: "${env.DEFAULT_SUBJECT}",
-                     body: "${env.DEFAULT_CONTENT}",
-                     replyTo: "${env.DEFAULT_REPLYTO}",
-                     to: "${env.DEFAULT_RECIPIENTS}"
+            emailext subject: "${DEFAULT_SUBJECT}",
+                     body: "${DEFAULT_CONTENT}",
+                     replyTo: "${DEFAULT_REPLYTO}",
+                     to: "${DEFAULT_RECIPIENTS}"
         }
     }
 }
