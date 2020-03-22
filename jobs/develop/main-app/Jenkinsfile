@@ -89,7 +89,7 @@ spec:
                 container("main") {
                     withMaven(mavenSettingsConfig: "002b7018-8317-4772-bc20-cf9923ed1c50") {
                         withSonarQubeEnv("EMAsphere SonarQube") {
-                            sh "mvn test sonar:sonar -f ${ROOT_POM_PATH} -B -Pci -Dsonar.branch.name=${BRANCH_NAME}"
+                            sh "mvn test sonar:sonar -f ${ROOT_POM_PATH} -B -Pci -Dsonar.branch.name=${env.BRANCH_NAME}"
                         }
                     }
                 }
