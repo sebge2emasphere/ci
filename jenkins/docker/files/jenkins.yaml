@@ -299,7 +299,7 @@ unclassified:
         triggers:
           skipScmCause: false
           skipUpstreamCause: true
-        webhookSecretId: "jenkins-sonarqube-webhook"
+        webhookSecretId: "jenkins-sonarqube-webhook-credentials"
   timestamperConfig:
     allPipelines: false
     elapsedTimeFormat: "'<b>'HH:mm:ss.S'</b> '"
