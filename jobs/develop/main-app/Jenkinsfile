@@ -77,7 +77,6 @@ spec:
                 container("main") {
                     withMaven(mavenSettingsConfig: "002b7018-8317-4772-bc20-cf9923ed1c50") {
                         withEnv(["PATH+EXTRA=/usr/share/sencha/bin"]) {
-                            sh "echo beginning $PATH"
                             sh "mvn clean package -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
                         }
                     }
@@ -89,7 +88,9 @@ spec:
                 container("main") {
                     withMaven(mavenSettingsConfig: "002b7018-8317-4772-bc20-cf9923ed1c50") {
                         withSonarQubeEnv("EMAsphere SonarQube") {
-                            sh "mvn test sonar:sonar -f ${ROOT_POM_PATH} -B -Pci -Dsonar.branch.name=develop"
+                            withEnv(["PATH+EXTRA=/usr/share/sencha/bin"]) {
+                                sh "mvn test sonar:sonar -f ${ROOT_POM_PATH} -B -Pci -Dsonar.branch.name=develop"
+                            }
                         }
                     }
                 }
@@ -108,7 +109,9 @@ spec:
             steps {
                 container("main") {
                     withMaven(mavenSettingsConfig: "002b7018-8317-4772-bc20-cf9923ed1c50") {
-                        sh "mvn install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
+                        withEnv(["PATH+EXTRA=/usr/share/sencha/bin"]) {
+                            sh "mvn install -f ${ROOT_POM_PATH} -B -DskipTests -Pci"
+                        }
                     }
                 }
             }
