@@ -7,7 +7,6 @@ ENV MAVEN_HOME=/usr/share/maven
 
 COPY --from=mvn /usr/share/maven/ $MAVEN_HOME
 
-
 RUN mkdir $SENCHA_HOME
 RUN wget https://static-emasphere-com.s3.eu-central-1.amazonaws.com/dev/ext-6.2.2.350-full.zip -O /tmp/ext.zip
 RUN unzip /tmp/ext.zip -d $SENCHA_HOME && rm /tmp/ext.zip
