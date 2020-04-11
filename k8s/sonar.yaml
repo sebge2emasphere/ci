@@ -34,6 +34,11 @@ spec:
                   key: password
             - name: sonar.search.javaAdditionalOpts
               value: -Dnode.store.allow_mmapfs=false
+            - name: SONAR_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: environment-config
+                  key: SONAR_URL
 #        volumeMounts:
 #          - mountPath: "/opt/sonarqube/conf/"
 #            name: sonarqube-conf

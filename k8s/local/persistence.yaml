@@ -60,3 +60,34 @@ spec:
   resources:
     requests:
       storage: 1000m
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: jenkins-pv-volume
+  namespace: ci
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 200m
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data"
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: jenkins-pv-claim
+  namespace: ci
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200m

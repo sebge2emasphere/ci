@@ -11,6 +11,8 @@ spec:
         app: jenkins
     spec:
       serviceAccountName: jenkins-service-account
+      securityContext:
+        runAsUser: 0
       imagePullSecrets:
         - name: com.emasphere.dev.ecr
       containers:
@@ -25,6 +27,7 @@ spec:
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
+              subPath: jenkins
           resources:
             limits:
               memory: "1000Mi"
@@ -36,6 +39,8 @@ spec:
                   key: JENKINS_URL
       volumes:
         - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: jenkins-pv-claim
 
 ---
 
