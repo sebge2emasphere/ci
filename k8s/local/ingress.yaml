@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: local-ingress
+  namespace: ci
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: jenkins.test.sgerard.be
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: jenkins
+              servicePort: 8080
+    - host: sonar.test.sgerard.be
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: sonar
+              servicePort: 9000
