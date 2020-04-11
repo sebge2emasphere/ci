@@ -46,3 +46,22 @@ spec:
         - name: jenkins-home
           persistentVolumeClaim:
             claimName: jenkins-pv-claim
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ci
+  name: jenkins
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+    - name: agent
+      port: 50000
+      targetPort: 50000
+  selector:
+    app: jenkins
