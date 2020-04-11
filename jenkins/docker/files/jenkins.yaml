@@ -3,23 +3,28 @@ jenkins:
     - "JNLP4-connect"
     - "Ping"
   securityRealm:
-    local:
-      allowsSignup: false
-      users:
-        - id: "admin"
-          password: "cbb9aa29e4ab4f3aa1f73f8291be9320"
+    googleOAuth2:
+      clientId: "241420143849-23fe8nbjf4cqupqgm8uu7g5md72ksdhf.apps.googleusercontent.com"
+      clientSecret: "{AQAAABAAAAAg8gUh5XhZ1ZQ78RRtWGXgt3ymJoppYmXSthnZFz822PaIX6Kpxb2tg03syCx4FMZR}"
+      domain: "emasphere.com"
   authorizationStrategy:
     roleBased:
       roles:
         global:
-          - assignments:
+          - name: "admin"
+            assignments:
               - "admin"
-            name: "admin"
+              - "sgerard@emasphere.com"
+              - "nlejeune@emasphere.com"
+              - "scouturiaux@emasphere.com"
             pattern: ".*"
             permissions:
+              - "Job/Move"
               - "Job/Build"
+              - "Lockable Resources/View"
               - "Credentials/Delete"
               - "Credentials/ManageDomains"
+              - "Lockable Resources/Unlock"
               - "View/Create"
               - "Agent/Configure"
               - "Job/Read"
@@ -28,6 +33,7 @@ jenkins:
               - "Job/Delete"
               - "Agent/Build"
               - "View/Configure"
+              - "Lockable Resources/Reserve"
               - "Agent/Provision"
               - "SCM/Tag"
               - "Job/Create"
@@ -35,6 +41,7 @@ jenkins:
               - "Credentials/View"
               - "Agent/Connect"
               - "Agent/Delete"
+              - "Run/Replay"
               - "Agent/Disconnect"
               - "Run/Delete"
               - "Job/Cancel"
@@ -281,6 +288,8 @@ unclassified:
   mavenModuleSet:
     globalMavenOpts: "-Xmx3000m"
     localRepository: "default"
+  naginatorPublisher:
+    regexpTimeoutMs: 30000
   pollSCM:
     pollingThreadCount: 10
   slackNotifier:

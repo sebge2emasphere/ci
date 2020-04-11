@@ -1,4 +1,4 @@
-configuration-as-code:1.36
+configuration-as-code:1.38
 configuration-as-code-support:1.18
 job-dsl:1.77
 
@@ -7,7 +7,7 @@ postgresql-api:42.2.5
 sonar:2.11
 junit:1.28
 
-slack:2.37
+slack:2.39
 email-ext:2.69
 
 github:1.29.5
@@ -15,7 +15,7 @@ github-branch-source:2.6.0
 embeddable-build-status:2.0.3
 
 nodejs:1.3.4
-maven-plugin:3.4
+maven-plugin:3.6
 pipeline-maven:3.8.2
 
 google-login:1.6
@@ -37,7 +37,7 @@ blueocean-web:1.22.0
 blueocean-config:1.22.0
 blueocean-i18n:1.22.0
 
-kubernetes:1.25.0
+kubernetes:1.25.2
 kubernetes-credentials:0.6.2
 kubernetes-credentials-provider:0.13
 
