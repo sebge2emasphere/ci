@@ -5,7 +5,7 @@ jenkins:
   securityRealm:
     googleOAuth2:
       clientId: "241420143849-23fe8nbjf4cqupqgm8uu7g5md72ksdhf.apps.googleusercontent.com"
-      clientSecret: "{AQAAABAAAAAg8gUh5XhZ1ZQ78RRtWGXgt3ymJoppYmXSthnZFz822PaIX6Kpxb2tg03syCx4FMZR}"
+      clientSecret: "${GOOGLE_OAUTH_SECRET}"
       domain: "emasphere.com"
   authorizationStrategy:
     roleBased:

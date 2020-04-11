@@ -37,6 +37,11 @@ spec:
                 configMapKeyRef:
                   name: environment-config
                   key: JENKINS_URL
+            - name: GOOGLE_OAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: google-oauth-secret
+                  key: text
       volumes:
         - name: jenkins-home
           persistentVolumeClaim:
