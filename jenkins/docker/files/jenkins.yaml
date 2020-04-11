@@ -161,7 +161,7 @@ unclassified:
       - credentialsId: "abeb4d27-b1d8-4209-8cee-6a9ad32ddba6"
         manageHooks: true
         name: "EMAsphere Github"
-    hookUrl: "http://build-dev.emasphere.com/github-webhook/"
+    hookUrl: "${JENKINS_URL}/github-webhook/"
   gitSCM:
     createAccountBasedOnEmail: false
     globalConfigEmail: "build-dev@emasphere.com"
@@ -271,7 +271,7 @@ unclassified:
               serverId: "emaNexusRelease"
   location:
     adminAddress: "build-dev@emasphere.com"
-    url: "http://build-dev.emasphere.com/"
+    url: "${JENKINS_URL}"
   mailer:
     charset: "UTF-8"
     defaultSuffix: "@emasphere.com"

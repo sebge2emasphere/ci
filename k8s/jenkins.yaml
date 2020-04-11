@@ -28,6 +28,12 @@ spec:
           resources:
             limits:
               memory: "1000Mi"
+          env:
+            - name: JENKINS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: environment-config
+                  key: JENKINS_URL
       volumes:
         - name: jenkins-home
 
