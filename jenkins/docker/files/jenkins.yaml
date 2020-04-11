@@ -27,13 +27,18 @@ jenkins:
             assignments:
               - "authenticated"
             permissions:
-              - "Job/Cancel"
               - "Overall/Read"
+              - "Job/Cancel"
               - "Job/Build"
               - "Job/Read"
               - "Job/Workspace"
               - "Job/ViewStatus"
               - "View/Read"
+              - "Agent/Connect"
+              - "Agent/Delete"
+              - "Agent/Disconnect"
+              - "Agent/Provision"
+              - "Agent/Build"
   clouds:
     - kubernetes:
         name: "kubernetes"
