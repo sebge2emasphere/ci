@@ -1,0 +1,32 @@
+groups:
+  - name: sonar-analysers
+    description: Any analyzer tools
+    permissions:
+      - codeviewer
+      - scan
+      - user
+users:
+  - name: jenkins
+    login: jenkins
+    password: bd4eTXk75nCbHuQ
+    groups:
+      - sonar-analysers
+properties:
+  - name: email.from
+    value: build-dev@emasphere.com
+  - name: sonar.branch.longLivedBranches.regex
+    value: (branch|release|develop|master).*
+  - name: email.smtp_host.secured
+    value: smtp-relay
+  - name: sonar.core.serverBaseURL
+    value: "${SONAR_URL}"
+  - name: sonar.auth.googleoauth.enabled
+    value: true
+  - name: sonar.auth.googleoauth.clientId.secured
+    value: 241420143849-50bqvo4vdie7ma5hqjp1m2s21sgubtsi.apps.googleusercontent.com
+  - name: sonar.auth.googleoauth.clientSecret.secured
+    value: "${GOOGLE_OAUTH_SECRET}"
+  - name: sonar.auth.googleoauth.allowUsersToSignUp
+    value: false
+  - name: sonar.auth.googleoauth.limitOauthDomain
+    value: emasphere.com

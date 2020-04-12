@@ -61,6 +61,26 @@ spec:
                 configMapKeyRef:
                   name: environment-config
                   key: SONAR_URL
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sonarqube-admin-credentials
+                  key: text
+            - name: GOOGLE_OAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: google-oauth-secret
+                  key: text
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - "/usr/bin/sonar-as-code"
+                  - "setup"
+                  - "-f"
+                  - "/shared/sonar.yaml"
+                  - "-s"
+                  - "http://localhost:9000"
           volumeMounts:
             - name: sonar-conf
               mountPath: "/opt/sonarqube/conf/"
