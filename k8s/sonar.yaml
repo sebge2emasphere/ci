@@ -12,10 +12,32 @@ spec:
     spec:
       imagePullSecrets:
         - name: com.emasphere.dev.ecr
+      initContainers:
+        - name: take-data-dir-ownership
+          image: alpine:3.6
+          command:
+            - chown
+            - -R
+            - 999:999
+            - /opt/sonarqube/
+          volumeMounts:
+            - name: sonar-conf
+              mountPath: "/opt/sonarqube/conf/"
+              subPath: sonar-conf
+            - name: sonar-data
+              mountPath: "/opt/sonarqube/data/"
+              subPath: sonar-data
+            - name: sonar-extensions
+              mountPath: "/opt/sonarqube/extensions/"
+              subPath: sonar-extensions
       containers:
         - name: sonar-server
           image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/sonar:1.0.0
           imagePullPolicy: Always
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+            runAsNonRoot: true
           ports:
             - name: http-port
               containerPort: 9000
@@ -59,3 +81,19 @@ spec:
 #        - name: sonarqube-extensions
 #          persistentVolumeClaim:
 #            claimName: sonarqube-extensions-pv-claim
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ci
+  name: sonar
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 9000
+      targetPort: 9000
+  selector:
+    app: sonar
