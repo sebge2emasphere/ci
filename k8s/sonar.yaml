@@ -61,26 +61,26 @@ spec:
                 configMapKeyRef:
                   name: environment-config
                   key: SONAR_URL
-#        volumeMounts:
-#          - mountPath: "/opt/sonarqube/conf/"
-#            name: sonarqube-conf
-#          - mountPath: "/opt/sonarqube/data/"
-#            name: sonarqube-data
-#          - mountPath: "/opt/sonarqube/extensions/"
-#            name: sonarqube-extensions
+          volumeMounts:
+            - name: sonar-conf
+              mountPath: "/opt/sonarqube/conf/"
+            - name: sonar-data
+              mountPath: "/opt/sonarqube/data/"
+            - name: sonar-extensions
+              mountPath: "/opt/sonarqube/extensions/"
           resources:
             limits:
               memory: "2000Mi"
-#      volumes:
-#        - name: sonarqube-conf
-#          persistentVolumeClaim:
-#            claimName: sonarqube-conf-pv-claim
-#        - name: sonarqube-data
-#          persistentVolumeClaim:
-#            claimName: sonarqube-data-pv-claim
-#        - name: sonarqube-extensions
-#          persistentVolumeClaim:
-#            claimName: sonarqube-extensions-pv-claim
+      volumes:
+        - name: sonar-conf
+          persistentVolumeClaim:
+            claimName: sonar-conf-pv-claim
+        - name: sonar-data
+          persistentVolumeClaim:
+            claimName: sonar-data-pv-claim
+        - name: sonar-extensions
+          persistentVolumeClaim:
+            claimName: sonar-extensions-pv-claim
 
 ---
 
