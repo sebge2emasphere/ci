@@ -40,7 +40,7 @@ spec:
             - name: GOOGLE_OAUTH_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: google-oauth-secret
+                  name: google-jenkins-oauth-secret
                   key: text
       volumes:
         - name: jenkins-home

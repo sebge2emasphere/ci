@@ -29,7 +29,7 @@ properties:
   - name: sonar.auth.googleoauth.clientSecret.secured
     value: "${GOOGLE_OAUTH_SECRET}"
   - name: sonar.auth.googleoauth.allowUsersToSignUp
-    value: false
+    value: true
   - name: sonar.auth.googleoauth.limitOauthDomain
     value: emasphere.com
   - name: sonar.forceAuthentication
