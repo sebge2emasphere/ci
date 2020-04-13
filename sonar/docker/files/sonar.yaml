@@ -38,4 +38,6 @@ properties:
     value: Github
   - name: sonar.lf.aboutText
     value: EMAsphere SonarQube Instance
+  - name: sonar.lf.logoUrl
+    value: https://www.emasphere.com/hs-fs/hubfs/01%20-%20Website%20Material/01%20EMAsphere%20Logos/Logo-EMAsphere-white.png?width=126&name=Logo-EMAsphere-white.png
 
