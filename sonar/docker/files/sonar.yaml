@@ -1,3 +1,5 @@
+admin:
+  password: "${ADMIN_PASSWORD}"
 groups:
   - name: sonar-analysers
     description: Any analyzer tools
@@ -30,3 +32,10 @@ properties:
     value: false
   - name: sonar.auth.googleoauth.limitOauthDomain
     value: emasphere.com
+  - name: sonar.forceAuthentication
+    value: true
+  - name: sonar.pullrequest.provider
+    value: Github
+  - name: sonar.lf.aboutText
+    value: EMAsphere SonarQube Instance
+
