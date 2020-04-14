@@ -21,7 +21,6 @@ spec:
             - 999:999
             - /opt/sonarqube/conf
             - /opt/sonarqube/data
-            - /opt/sonarqube/extensions
           volumeMounts:
             - name: sonar-conf
               mountPath: "/opt/sonarqube/conf/"
@@ -29,9 +28,6 @@ spec:
             - name: sonar-data
               mountPath: "/opt/sonarqube/data/"
               subPath: sonar-data
-            - name: sonar-extensions
-              mountPath: "/opt/sonarqube/extensions/"
-              subPath: sonar-extensions
       containers:
         - name: sonar-server
           image: 840205991060.dkr.ecr.eu-central-1.amazonaws.com/dev/sonar:1.0.0
@@ -90,9 +86,6 @@ spec:
             - name: sonar-data
               mountPath: "/opt/sonarqube/data/"
               subPath: sonar-data
-            - name: sonar-extensions
-              mountPath: "/opt/sonarqube/extensions/"
-              subPath: sonar-extensions
           resources:
             limits:
               memory: "2000Mi"
@@ -103,9 +96,6 @@ spec:
         - name: sonar-data
           persistentVolumeClaim:
             claimName: sonar-data-pv-claim
-        - name: sonar-extensions
-          persistentVolumeClaim:
-            claimName: sonar-extensions-pv-claim
 
 ---
 

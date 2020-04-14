@@ -153,34 +153,3 @@ spec:
   resources:
     requests:
       storage: 200m
-
----
-
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: sonar-extensions-pv-volume
-  namespace: ci
-spec:
-  storageClassName: standard
-  capacity:
-    storage: 200m
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/data"
-
----
-
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: sonar-extensions-pv-claim
-  namespace: ci
-spec:
-  storageClassName: standard
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 200m
