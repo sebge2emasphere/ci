@@ -19,7 +19,9 @@ spec:
             - chown
             - -R
             - 999:999
-            - /opt/sonarqube/
+            - /opt/sonarqube/conf
+            - /opt/sonarqube/data
+            - /opt/sonarqube/extensions
           volumeMounts:
             - name: sonar-conf
               mountPath: "/opt/sonarqube/conf/"
@@ -84,10 +86,13 @@ spec:
           volumeMounts:
             - name: sonar-conf
               mountPath: "/opt/sonarqube/conf/"
+              subPath: sonar-conf
             - name: sonar-data
               mountPath: "/opt/sonarqube/data/"
+              subPath: sonar-data
             - name: sonar-extensions
               mountPath: "/opt/sonarqube/extensions/"
+              subPath: sonar-extensions
           resources:
             limits:
               memory: "2000Mi"
