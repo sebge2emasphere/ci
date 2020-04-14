@@ -63,7 +63,7 @@ spec:
                 configMapKeyRef:
                   name: environment-config
                   key: SONAR_URL
-            - name: ADMIN_PASSWORD
+            - name: ADMINISTRATOR_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: sonarqube-admin-credentials

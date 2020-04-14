@@ -1,5 +1,5 @@
 admin:
-  password: "${ADMIN_PASSWORD}"
+  password: "${ADMINISTRATOR_PASSWORD}"
 groups:
   - name: sonar-analysers
     description: Any analyzer tools
