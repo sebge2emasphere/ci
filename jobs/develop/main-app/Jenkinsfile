@@ -89,7 +89,7 @@ spec:
                     withMaven(mavenSettingsConfig: '002b7018-8317-4772-bc20-cf9923ed1c50') {
                         withSonarQubeEnv('EMAsphere SonarQube') {
                             withEnv(['PATH+EXTRA=/usr/share/sencha/bin']) {
-                                sh 'mvn test sonar:sonar -f ${ROOT_POM_PATH} -B -Pci -fae -Dsonar.branch.name=master'
+                                sh 'mvn test sonar:sonar -f ${ROOT_POM_PATH} -B -Pci -fae'
                             }
                         }
                     }
